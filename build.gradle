@@ -1,0 +1,18 @@
+group 'andrewt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '6.1.1'
+}
+
+task testng(type: Test) {
+    useTestNG()
+}
