@@ -18,8 +18,6 @@ public class BitsTest {
     }
 
     return data;
-
-
   }
 
   @Test(description = "ddd", dataProvider = "isPowerOfTwo")
