@@ -8,7 +8,6 @@ public class BitsTest {
   @DataProvider(name = "isPowerOfTwo")
   public static Object[][] isPowerOfTwo() {
     final int testCount = Integer.SIZE * 2;
-
     final Object[][] data = new Object[testCount][];
 
     int index = 0;
