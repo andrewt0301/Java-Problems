@@ -81,10 +81,6 @@ public final class SingleLinkedList {
 
     final Node node = new Node(value, curr);
 
-    if (prev == tail) {
-      tail = node;
-    }
-
     if (prev == null) {
       head = node;
     } else {
