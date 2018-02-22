@@ -4,10 +4,6 @@ public final class Sorting {
   private Sorting() {}
 
   public static void insertionSort(final int[] data) {
-    if (data.length < 2) {
-      return;
-    }
-
     for (int i = 1; i < data.length; i++) {
       final int key = data[i];
 
@@ -22,10 +18,6 @@ public final class Sorting {
   }
 
   public static void bubbleSort(final int[] data) {
-    if (data.length < 2) {
-      return;
-    }
-
     for (int i = 0; i < data.length - 1; i++) {
       for (int j = data.length - 1; j > i; j--) {
         final int k = j - 1;
