@@ -21,6 +21,29 @@ public class SingleLinkedListTest {
   }
 
   @Test
+  public void testGet() {
+    final SingleLinkedList list = new SingleLinkedList(new int[] {5, 4, 3, 2, 1});
+    Assert.assertEquals(list.toArray(), new int[] {5, 4, 3, 2, 1});
+
+    final int length = list.getLength();
+    for (int index = 0; index < length; index++) {
+      Assert.assertEquals(list.get(index), length - index);
+    }
+  }
+
+  @Test(expectedExceptions = IndexOutOfBoundsException.class)
+  public void testGetLowerBound() {
+    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    new SingleLinkedList().get(-1);
+  }
+
+  @Test(expectedExceptions = IndexOutOfBoundsException.class)
+  public void testGetUpperBound() {
+    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    list.get(list.getLength());
+  }
+
+  @Test
   public void testSet() {
     final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
     Assert.assertEquals(list.toArray(), new int[] {1, 2, 3, 4, 5});
