@@ -12,4 +12,11 @@ public class SortingTest {
     Assert.assertEquals(data, new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9});
   }
 
+  @Test
+  public void testBubbleSort() throws Exception {
+    final int[] data = new int[] {9, 1, 5, 2, 6, 3, 7, 4, 8};
+    Sorting.bubbleSort(data);
+    Assert.assertEquals(data, new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9});
+  }
+
 }
