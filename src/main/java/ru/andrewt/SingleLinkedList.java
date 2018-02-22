@@ -48,10 +48,19 @@ public final class SingleLinkedList {
     length++;
   }
 
-  public void set(final int index, final int value) {
-    if (!(0 <= index && index < length)) {
-      throw new IndexOutOfBoundsException();
+  public int get(final int index) {
+    checkBounds(index);
+
+    Node node = head;
+    for (int i = 0; i < index; i++) {
+      node = node.next;
     }
+
+    return node.value;
+  }
+
+  public void set(final int index, final int value) {
+    checkBounds(index);
 
     Node node = head;
     for (int i = 0; i < index; i++) {
@@ -62,14 +71,12 @@ public final class SingleLinkedList {
   }
 
   public void insertAt(final int index, final int value) {
-    if (!(0 <= index && index <= length)) {
-      throw new IndexOutOfBoundsException();
-    }
-
     if (index == length) {
       add(value);
       return;
     }
+
+    checkBounds(index);
 
     Node prev = null;
     Node curr = head;
@@ -91,9 +98,7 @@ public final class SingleLinkedList {
   }
 
   public void removeAt(final int index) {
-    if (!(0 <= index && index < length)) {
-      throw new IndexOutOfBoundsException();
-    }
+    checkBounds(index);
 
     Node prev = null;
     Node curr = head;
@@ -156,5 +161,11 @@ public final class SingleLinkedList {
 
     builder.append(']');
     return builder.toString();
+  }
+
+  private void checkBounds(final int index) {
+    if (!(0 <= index && index < length)) {
+      throw new IndexOutOfBoundsException();
+    }
   }
 }
