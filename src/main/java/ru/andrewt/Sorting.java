@@ -22,11 +22,15 @@ public final class Sorting {
       for (int j = data.length - 1; j > i; j--) {
         final int k = j - 1;
         if (data[j] < data[k]) {
-          final int temp = data[j];
-          data[j] = data[k];
-          data[k] = temp;
+          swap(data, j, k);
         }
       }
     }
+  }
+
+  private static void swap(final int[] data, final int firstIndex, final int secondIndex) {
+    final int temp = data[firstIndex];
+    data[firstIndex] = data[secondIndex];
+    data[secondIndex] = temp;
   }
 }
