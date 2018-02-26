@@ -28,6 +28,33 @@ public final class Sorting {
     }
   }
 
+  public static void quickSort(final int[] data) {
+    quickSort(data, 0, data.length - 1);
+  }
+
+  private static void quickSort(final int[] data, final int start, final int end) {
+    if (start < end) {
+      final int split = partition(data, start, end);
+      quickSort(data, start, split - 1);
+      quickSort(data, split + 1, end);
+    }
+  }
+
+  private static int partition(final int[] data, final int start, final int end) {
+    final int pivot = data[end];
+    int split = start;
+
+    for (int index = start; index < end; index++) {
+      if (data[index] <= pivot) {
+        swap(data, split, index);
+        split++;
+      }
+    }
+
+    swap(data, split, end);
+    return split;
+  }
+
   private static void swap(final int[] data, final int firstIndex, final int secondIndex) {
     final int temp = data[firstIndex];
     data[firstIndex] = data[secondIndex];
