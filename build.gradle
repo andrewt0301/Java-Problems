@@ -2,6 +2,7 @@ group 'andrewt'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 sourceCompatibility = 1.8
 
@@ -11,4 +12,15 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+    }
 }
