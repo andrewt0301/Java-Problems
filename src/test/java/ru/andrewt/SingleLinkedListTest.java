@@ -34,7 +34,7 @@ public class SingleLinkedListTest {
   @Test(expected = IndexOutOfBoundsException.class)
   public void testGetLowerBound() {
     final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
-    new SingleLinkedList().get(-1);
+    list.get(-1);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
@@ -56,7 +56,7 @@ public class SingleLinkedListTest {
   @Test(expected = IndexOutOfBoundsException.class)
   public void testSetLowerBound() {
     final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
-    new SingleLinkedList().set(-1, 0);
+    list.set(-1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)

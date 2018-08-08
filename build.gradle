@@ -1,6 +1,7 @@
 group 'andrewt'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'findbugs'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
@@ -11,7 +12,12 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'junit:junit:4.12'
+    findbugs 'com.google.code.findbugs:findbugs:3.0.1'
+}
+
+findbugs {
+    ignoreFailures = true
 }
 
 jacoco {
@@ -22,5 +28,12 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
+    }
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
     }
 }

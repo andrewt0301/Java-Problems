@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class SortingTest {
-  public static int[] SORTED = new int[] {1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9};
-  public static int[] UNSORTED = new int[] {9, 1, 3, 5, 2, 6, 3, 7, 4, 2, 8};
+  static final int[] SORTED = new int[] {1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9};
+  static final int[] UNSORTED = new int[] {9, 1, 3, 5, 2, 6, 3, 7, 4, 2, 8};
 
   @Test
   public void testInsertionSort() {
