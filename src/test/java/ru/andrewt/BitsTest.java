@@ -1,26 +1,37 @@
 package ru.andrewt;
 
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class BitsTest {
-  @DataProvider(name = "isPowerOfTwo")
-  public static Object[][] isPowerOfTwo() {
+  @Parameterized.Parameter()
+  public int input;
+
+  @Parameterized.Parameter(1)
+  public boolean expected;
+
+  @Parameterized.Parameters(name = "{index}: Bits.isPowerOfTwo({0}) == {1}")
+  public static Collection<Object[]> data() {
     final int testCount = Integer.SIZE * 2;
-    final Object[][] data = new Object[testCount][];
+    final Collection<Object[]> data = new ArrayList<>(testCount);
 
     int index = 0;
     for (int value = 1; value != 0; value = value << 1) {
-      data[index++] = new Object[] {value, true};
-      data[index++] = new Object[] {value != 1 ? value + 1 : value - 1, false};
+      data.add(new Object[] {value, true});
+      data.add(new Object[] {value != 1 ? value + 1 : value - 1, false});
     }
 
     return data;
   }
 
-  @Test(description = "ddd", dataProvider = "isPowerOfTwo")
-  public void testIsPowerOfTwo(final int input, final boolean expected) throws Exception {
+  @Test
+  public void testIsPowerOfTwo() throws Exception {
     Assert.assertEquals(Bits.isPowerOfTwo(input), expected);
   }
 }

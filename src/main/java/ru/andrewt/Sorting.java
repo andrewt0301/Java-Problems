@@ -32,7 +32,7 @@ public final class Sorting {
     quickSort(data, 0, data.length - 1);
   }
 
-  private static void quickSort(final int[] data, final int start, final int end) {
+  public static void quickSort(final int[] data, final int start, final int end) {
     if (start < end) {
       final int split = partition(data, start, end);
       quickSort(data, start, split - 1);
@@ -59,5 +59,47 @@ public final class Sorting {
     final int temp = data[firstIndex];
     data[firstIndex] = data[secondIndex];
     data[secondIndex] = temp;
+  }
+
+  public static void mergeSort(final int[] data) {
+    mergeSort(data, 0, data.length - 1);
+  }
+
+  public static void mergeSort(final int[] data, final int start, final int end) {
+    if (start < end) {
+      final int split = (start + end) / 2;
+      mergeSort(data, start, split);
+      mergeSort(data, split + 1, end);
+      merge(data, start, split, end);
+    }
+  }
+
+  private static void merge(int[] data, int start, int split, int end) {
+    final int leftLen = split - start + 1;
+    final int[] leftData = new int[leftLen + 1];
+    for (int index = 0; index < leftLen; index++) {
+      leftData[index] = data[start + index];
+    }
+    leftData[leftLen] = Integer.MAX_VALUE;
+
+    final int rightLen = end - split;
+    final int[] rightData = new int[rightLen + 1];
+    for (int index = 0; index < rightLen; index++) {
+      rightData[index] = data[split + index + 1];
+    }
+    rightData[rightLen] = Integer.MAX_VALUE;
+
+    for (int index = start, leftIndex = 0, rightIndex = 0; index <= end; ++index) {
+      final int left = leftData[leftIndex];
+      final int right = rightData[rightIndex];
+
+      if (left <= right) {
+        data[index] = left;
+        leftIndex++;
+      } else {
+        data[index] = right;
+        rightIndex++;
+      }
+    }
   }
 }
