@@ -1,5 +1,7 @@
 package ru.andrewt;
 
+import static ru.andrewt.Utils.swap;
+
 public final class Sorting {
   private Sorting() {}
 
@@ -53,12 +55,6 @@ public final class Sorting {
 
     swap(data, split, end);
     return split;
-  }
-
-  private static void swap(final int[] data, final int firstIndex, final int secondIndex) {
-    final int temp = data[firstIndex];
-    data[firstIndex] = data[secondIndex];
-    data[secondIndex] = temp;
   }
 
   public static void mergeSort(final int[] data) {
