@@ -43,4 +43,11 @@ public class SortingTest {
     HeapSort.heapsort(data);
     Assert.assertArrayEquals(SORTED, data);
   }
+
+  @Test
+  public void testCountingSort() {
+    final int[] data = Arrays.copyOf(UNSORTED, UNSORTED.length);
+    Sorting.countingSort(data, 10);
+    Assert.assertArrayEquals(SORTED, data);
+  }
 }
