@@ -1,5 +1,7 @@
 package ru.andrewt;
 
+import java.util.Arrays;
+
 import static ru.andrewt.Utils.swap;
 
 public final class Sorting {
@@ -96,6 +98,29 @@ public final class Sorting {
         data[index] = right;
         rightIndex++;
       }
+    }
+  }
+
+  public static void countingSort(final int[] data, final int rangeSize) {
+    final int[] counts = new int[rangeSize];
+    Arrays.fill(counts, 0);
+
+    for (int index = 0; index < data.length; ++index) {
+      final int value = data[index];
+      counts[value]++;
+    }
+
+    for (int index = 1; index < counts.length; ++index) {
+      counts[index] += counts[index - 1];
+    }
+
+    final int[] dataCopy = Arrays.copyOf(data, data.length);
+    for (int index = data.length - 1; index >=0; --index) {
+      final int value = dataCopy[index];
+      final int count = counts[value];
+
+      data[count - 1] = value;
+      counts[value]--;
     }
   }
 }
