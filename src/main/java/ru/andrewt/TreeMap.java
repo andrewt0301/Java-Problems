@@ -50,7 +50,10 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V min() {
-    Node<K,V> x = root;
+    return min(root);
+  }
+
+  private V min(Node<K, V> x) {
     while (x.left != NIL) {
       x = x.left;
     }
@@ -58,7 +61,10 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V max() {
-    Node<K,V> x = root;
+    return max(root);
+  }
+
+  private V max(Node<K, V> x) {
     while (x.right != NIL) {
       x = x.right;
     }
