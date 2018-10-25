@@ -6,14 +6,14 @@ public final class ListUtils {
   private ListUtils() {}
 
   public static boolean isCyclic(Node root) {
-    Node slow = root;
     Node fast = root;
+    Node slow = root;
 
     while (fast != null) {
-      slow = slow.next;
       fast = fast.next;
+      slow = slow.next;
 
-      if (null != fast) {
+      if (fast != null) {
         fast = fast.next;
         if (fast == slow) {
           return true;
