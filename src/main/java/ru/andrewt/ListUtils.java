@@ -24,4 +24,30 @@ public final class ListUtils {
     return false;
   }
 
+  public static Node newList(final int length, final int cycleIndex) {
+    Node head = null;
+    Node tail = null;
+    Node cycle = null;
+
+    for (int index = length - 1; index >= 0; --index) {
+      final Node node = new Node(index, head);
+
+      if (head == null) {
+        tail = node;
+      }
+
+      if (index == cycleIndex) {
+        cycle = node;
+      }
+
+      head = node;
+    }
+
+    if (cycle != null) {
+      tail.next = cycle;
+    }
+
+    return head;
+  }
+
 }
