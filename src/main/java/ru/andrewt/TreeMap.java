@@ -141,4 +141,67 @@ public final class TreeMap<K extends Comparable<K>, V> {
     ++size;
     return null;
   }
+
+  public void remove(K k) {
+    Node<K,V> z = search(root, k);
+    if (z != NIL) {
+      delete(z);
+    }
+  }
+
+  private void delete(Node<K,V> z) {
+    if (z.left == NIL) {
+      transplant(z, z.right);
+    } else if (z.right == NIL) {
+      transplant(z, z.left);
+    } else {
+      Node<K,V> y = min(z.right);
+      if (y.p != z) {
+        transplant(y, y.right);
+        y.right = z.right;
+        y.right.p = y;
+      }
+      transplant(z, y);
+      y.left = z.left;
+      y.left.p = y;
+    }
+  }
+
+  private void transplant(Node<K,V> u, Node<K,V> v) {
+    if (u.p == NIL) {
+      root = v;
+    } else if (u == u.p.left) {
+      u.p.left = v;
+    } else {
+      u.p.right = v;
+    }
+    if (v != NIL) {
+      v.p = u.p;
+    }
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    saveToStringBuilder(sb, root, 0);
+    return sb.toString();
+  }
+
+  private void saveToStringBuilder(StringBuilder sb, Node<K,V> node, int level) {
+    if (node == NIL) {
+      return;
+    }
+
+    saveToStringBuilder(sb, node.right, level + 1);
+
+    final int offset = 4;
+    for (int i = 0; i < offset * level; i++) {
+      sb.append(' ');
+    }
+
+    sb.append(String.format("[%s:%s]", node.key, node.value));
+    sb.append(System.lineSeparator());
+
+    saveToStringBuilder(sb, node.left, level + 1);
+  }
 }
