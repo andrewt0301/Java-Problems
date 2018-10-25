@@ -1,11 +1,11 @@
 package ru.andrewt;
 
 public final class SingleLinkedList {
-  private static final class Node {
-    private int value;
-    private Node next;
+  public static final class Node {
+    public int value;
+    public Node next;
 
-    private Node(final int value, final Node next) {
+    public Node(final int value, final Node next) {
       this.value = value;
       this.next = next;
     }
