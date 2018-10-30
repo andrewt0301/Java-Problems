@@ -1,5 +1,7 @@
 package ru.andrewt;
 
+import java.util.Arrays;
+
 public final class TreeMap<K extends Comparable<K>, V> {
   private static final class Node<K extends Comparable<K>, V> {
     final K key;
@@ -146,6 +148,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
     Node<K,V> z = search(root, k);
     if (z != NIL) {
       delete(z);
+      size--;
     }
   }
 
@@ -180,6 +183,26 @@ public final class TreeMap<K extends Comparable<K>, V> {
     }
   }
 
+  public K[] getKeys() {
+    final K[] keys = Utils.newArray(size);
+    saveKeys(root, keys, 0);
+    return keys;
+  }
+
+
+
+  private static <K extends Comparable<K>, V> int saveKeys(
+        Node<K,V> node,
+        K[] keys,
+        int index) {
+    if (node != NIL) {
+      index = saveKeys(node.left, keys, index);
+      keys[index++] = node.key;
+      index = saveKeys(node.right, keys, index);
+    }
+    return index;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -187,7 +210,10 @@ public final class TreeMap<K extends Comparable<K>, V> {
     return sb.toString();
   }
 
-  private void saveToStringBuilder(StringBuilder sb, Node<K,V> node, int level) {
+  private static <K extends Comparable<K>, V> void saveToStringBuilder(
+        StringBuilder sb,
+        Node<K,V> node,
+        int level) {
     if (node == NIL) {
       return;
     }
