@@ -39,12 +39,11 @@ public final class SingleLinkedList {
   public void add(final int value) {
     final Node node = new Node(value, null);
     if (tail == null) {
-      tail = node;
-      head = tail;
+      head = node;
     } else {
       tail.next = node;
-      tail = node;
     }
+    tail = node;
     length++;
   }
 

@@ -11,12 +11,8 @@ public final class Utils {
     a[j] = temp;
   }
 
-  public static <T> T[] newArray(final int length) {
-    return Arrays.copyOf(asArray(/*empty*/), length);
-  }
-
-  public static <T> T[] asArray(final T ... items) {
-    return items;
+  public static <T> T[] newArray(final int length, final T ... old) {
+    return Arrays.copyOf(old, length);
   }
 
 }

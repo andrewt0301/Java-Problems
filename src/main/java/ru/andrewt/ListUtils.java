@@ -50,4 +50,30 @@ public final class ListUtils {
     return head;
   }
 
+  public static Node intersectSorted(final Node list1, final Node list2) {
+    Node head = null;
+    Node tail = null;
+
+    Node node1 = list1;
+    Node node2 = list2;
+
+    while (node1 != null && node2 != null) {
+      if (node1.value == node2.value) {
+        Node newNode = new Node(node1.value, null);
+        if (tail == null) {
+          head = newNode;
+        } else {
+          tail.next = newNode;
+        }
+        tail = newNode;
+      } else if (node1.value < node2.value) {
+        node1 = node1.next;
+      } else {
+        node2 = node2.next;
+      }
+    }
+
+    return head;
+  }
+
 }
