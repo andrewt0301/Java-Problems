@@ -1,7 +1,5 @@
 package ru.andrewt;
 
-import java.util.Arrays;
-
 public final class TreeMap<K extends Comparable<K>, V> {
   private static final class Node<K extends Comparable<K>, V> {
     final K key;
@@ -188,8 +186,6 @@ public final class TreeMap<K extends Comparable<K>, V> {
     saveKeys(root, keys, 0);
     return keys;
   }
-
-
 
   private static <K extends Comparable<K>, V> int saveKeys(
         Node<K,V> node,
