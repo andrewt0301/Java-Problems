@@ -50,4 +50,12 @@ public class SortingTest {
     Sorting.countingSort(data, 10);
     Assert.assertArrayEquals(SORTED, data);
   }
+
+  @Test
+  public void testRadixSort() {
+    final int[] data = Arrays.copyOf(UNSORTED, UNSORTED.length);
+    Sorting.radixSort(data);
+    Assert.assertArrayEquals(SORTED, data);
+  }
+
 }

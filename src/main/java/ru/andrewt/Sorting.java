@@ -1,9 +1,29 @@
+/*
+ * Copyright 2018 AndrewT (https://github.com/andrewt0301)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package ru.andrewt;
 
 import java.util.Arrays;
 
+import static ru.andrewt.Utils.move;
 import static ru.andrewt.Utils.swap;
 
+/**
+ * The {@link Sorting} class provides methods that implement various kinds of sorting algorithms.
+ *
+ * @author Andrei Tatarnikov
+ */
 public final class Sorting {
   private Sorting() {}
 
@@ -121,6 +141,35 @@ public final class Sorting {
 
       data[count - 1] = value;
       counts[value]--;
+    }
+  }
+
+  public static void radixSort(final int[] data) {
+    for (int mask = 1; mask != 0; mask <<= 1) {
+      partitionWithMask(data, mask);
+    }
+  }
+
+  /**
+   * Partitions array of integers checking whether they satisfy the bit mask.
+   *
+   * <p>Values unsatisfying the mask are placed first and the ones satisfying the mask are
+   * placed next. The partition is stable (does not break relative order of values belonging
+   * to the same partitions).</p>
+   *
+   * @param data Array of integer values.
+   * @param mask Bit mask used for partitioning.
+   */
+  public static void partitionWithMask(final int[] data, final int mask) {
+    int partitionIndex = 0;
+    for (int index = 0; index < data.length; ++index) {
+      final int value = data[index];
+      if ((value & mask) == 0) {
+        if (index > partitionIndex) {
+          move(data, index, partitionIndex);
+        }
+        partitionIndex++;
+      }
     }
   }
 }
