@@ -23,16 +23,42 @@ public final class Utils {
   private Utils() {}
 
   /**
-   * Swaps two elements in an array.
+   * Swaps two array elements.
    *
-   * @param a Array.
-   * @param i First element.
-   * @param j Second element.
+   * @param array Array.
+   * @param first First element.
+   * @param second Second element.
    */
-  public static void swap(final int[] a, final int i, final int j) {
-    final int temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
+  public static void swap(final int[] array, final int first, final int second) {
+    final int temp = array[first];
+    array[first] = array[second];
+    array[second] = temp;
+  }
+
+  /**
+   * Moves an array element from one position to another.
+   *
+   * @param array Array.
+   * @param from From position.
+   * @param to To position.
+   */
+  public static void move(final int[] array, final int from, final int to) {
+    if (from == to) {
+      return;
+    }
+
+    final int value = array[from];
+    if (from < to) {
+      for (int index = from + 1; index <= to; ++index) {
+        array[index - 1] = array[index];
+      }
+    } else {
+      for (int index = from - 1; index >= to; --index) {
+        array[index + 1] = array[index];
+      }
+    }
+
+    array[to] = value;
   }
 
   /**
