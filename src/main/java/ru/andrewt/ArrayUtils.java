@@ -17,10 +17,10 @@ package ru.andrewt;
 import java.util.Arrays;
 
 /**
- * The {@link Utils} class provides utility methods to manipulate with arrays.
+ * The {@link ArrayUtils} class provides utility methods to manipulate with arrays.
  */
-public final class Utils {
-  private Utils() {}
+public final class ArrayUtils {
+  private ArrayUtils() {}
 
   /**
    * Swaps two array elements.
