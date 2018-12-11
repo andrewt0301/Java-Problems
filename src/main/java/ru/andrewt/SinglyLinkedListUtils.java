@@ -17,21 +17,22 @@ package ru.andrewt;
 import ru.andrewt.SinglyLinkedList.Node;
 
 /**
- * The {@link ListUtils} class provides utility methods to manipulate with singly linked lists.
+ * The {@link SinglyLinkedListUtils} class provides utility methods to manipulate
+ * with singly linked lists.
  *
  * @author Andrei Tatarnikov
  */
-public final class ListUtils {
-  private ListUtils() {}
+public final class SinglyLinkedListUtils {
+  private SinglyLinkedListUtils() {}
 
   /**
-   * Checks whether the specified single-linked list is cyclic.
+   * Checks whether the specified singly inked list is cyclic.
    *
    * <p>The check is based on Floyd's Tortoise and Hare algorithm. The idea is that the list
    * is traversed by two cursors with different steps (e.g. 1 and 2) until both cursors meet
    * (the list is cyclic) or the end of the list is reached (the list is non-cyclic).</p>
    *
-   * @param head Head of a single-linked list.
+   * @param head Head of a singly linked list.
    * @return {@code true} if the list if cyclic or {@code false} otherwise.
    */
   public static boolean isCyclic(Node head) {
@@ -120,7 +121,7 @@ public final class ListUtils {
    * Constructs a singly linked list on the basis of the specified array of integers.
    *
    * @param values Integer values.
-   * @return Head of a single-linked list.
+   * @return Head of a singly linked list.
    */
   public static Node asList(final int... values) {
     return new SinglyLinkedList(values).head;

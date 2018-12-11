@@ -19,7 +19,13 @@ import org.junit.Test;
 
 import ru.andrewt.SinglyLinkedList.Node;
 
-public class ListUtilsTest {
+/**
+ * The {@link SinglyLinkedListUtilsTest} class contains tests for the {@link SinglyLinkedListUtils}
+ * class methods.
+ *
+ * @author Andrei Tatarnikov
+ */
+public class SinglyLinkedListUtilsTest {
 
   @Test
   public void test_isCyclic() {
@@ -42,19 +48,19 @@ public class ListUtilsTest {
       int cycleIndex = (int) dataItem[1];
       boolean expected = (boolean) dataItem[2];
 
-      Node list = ListUtils.newCyclicList(length, cycleIndex);
-      boolean cyclic = ListUtils.isCyclic(list);
+      Node list = SinglyLinkedListUtils.newCyclicList(length, cycleIndex);
+      boolean cyclic = SinglyLinkedListUtils.isCyclic(list);
 
       Assert.assertEquals(expected, cyclic);
     }
   }
 
   @Test
-  public void test_intersectSorted() {
-    Node list1 = ListUtils.asList(3, 5, 7, 8, 10, 13, 14, 15);
-    Node list2 = ListUtils.asList(2, 4, 5, 6,  8, 11, 13, 15);
+  public void testIntersectSorted() {
+    Node list1 = SinglyLinkedListUtils.asList(3, 5, 7, 8, 10, 13, 14, 15);
+    Node list2 = SinglyLinkedListUtils.asList(2, 4, 5, 6,  8, 11, 13, 15);
 
-    Node list3 = ListUtils.intersectSorted(list1, list2);
+    Node list3 = SinglyLinkedListUtils.intersectSorted(list1, list2);
     Node head = list3;
 
     final StringBuilder builder = new StringBuilder();
@@ -69,7 +75,6 @@ public class ListUtilsTest {
 
     builder.append(']');
     System.out.println(builder.toString());
-
   }
 
 }
