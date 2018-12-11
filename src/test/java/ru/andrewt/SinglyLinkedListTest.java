@@ -17,6 +17,11 @@ package ru.andrewt;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * The {@link SinglyLinkedListTest} class contains tests for the {@link SinglyLinkedList} class.
+ *
+ * @author Andrei Tatarnikov
+ */
 public class SinglyLinkedListTest {
   @Test
   public void testIsEmpty() {
