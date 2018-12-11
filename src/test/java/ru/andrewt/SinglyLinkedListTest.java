@@ -1,14 +1,28 @@
+/*
+ * Copyright 2018 AndrewT (https://github.com/andrewt0301)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package ru.andrewt;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SingleLinkedListTest {
+public class SinglyLinkedListTest {
   @Test
   public void testIsEmpty() {
-    Assert.assertTrue(new SingleLinkedList().isEmpty());
+    Assert.assertTrue(new SinglyLinkedList().isEmpty());
 
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     Assert.assertFalse(list.isEmpty());
 
     final int length = list.getLength();
@@ -22,7 +36,7 @@ public class SingleLinkedListTest {
 
   @Test
   public void testGet() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {5, 4, 3, 2, 1});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {5, 4, 3, 2, 1});
     Assert.assertArrayEquals(list.toArray(), new int[] {5, 4, 3, 2, 1});
 
     final int length = list.getLength();
@@ -33,19 +47,19 @@ public class SingleLinkedListTest {
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testGetLowerBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.get(-1);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testGetUpperBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.get(list.getLength());
   }
 
   @Test
   public void testSet() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     Assert.assertArrayEquals(list.toArray(), new int[] {1, 2, 3, 4, 5});
 
     list.set(0, 7);
@@ -55,19 +69,19 @@ public class SingleLinkedListTest {
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testSetLowerBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.set(-1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testSetUpperBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.set(list.getLength(), 0);
   }
 
   @Test
   public void testReverse() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {5, 4, 3, 2, 1});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {5, 4, 3, 2, 1});
     Assert.assertArrayEquals(list.toArray(), new int[] {5, 4, 3, 2, 1});
 
     list.reverse();
@@ -76,7 +90,7 @@ public class SingleLinkedListTest {
 
   @Test
   public void testRemove() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     Assert.assertArrayEquals(list.toArray(), new int[] {1, 2, 3, 4, 5});
 
     list.removeAt(0);
@@ -88,19 +102,19 @@ public class SingleLinkedListTest {
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testRemoveLowerBound() {
-    final SingleLinkedList list = new SingleLinkedList();
+    final SinglyLinkedList list = new SinglyLinkedList();
     list.removeAt(0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testRemoveUpperBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.removeAt(list.getLength());
   }
 
   @Test
   public void testInsert() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     Assert.assertArrayEquals(list.toArray(), new int[] {1, 2, 3, 4, 5});
 
     list.insertAt(0, 0);
@@ -115,22 +129,22 @@ public class SingleLinkedListTest {
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testInsertLowerBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.insertAt(-1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
   public void testInsertUpperBound() {
-    final SingleLinkedList list = new SingleLinkedList(new int[] {1, 2, 3, 4, 5});
+    final SinglyLinkedList list = new SinglyLinkedList(new int[] {1, 2, 3, 4, 5});
     list.insertAt(list.getLength() + 1, 0);
   }
 
   @Test
   public void testToString() {
     Assert.assertEquals(
-        new SingleLinkedList().toString(), "[]");
+        new SinglyLinkedList().toString(), "[]");
 
     Assert.assertEquals(
-        new SingleLinkedList(new int[] {1, 2, 3, 4, 5}).toString(), "[1, 2, 3, 4, 5]");
+        new SinglyLinkedList(new int[] {1, 2, 3, 4, 5}).toString(), "[1, 2, 3, 4, 5]");
   }
 }

@@ -15,11 +15,11 @@
 package ru.andrewt;
 
 /**
- * The {@link SingleLinkedList} class implements the single-linked list data structure.
+ * The {@link SinglyLinkedList} class implements the singly linked list data structure.
  *
  * @author Andrei Tatarnikov
  */
-public final class SingleLinkedList {
+public final class SinglyLinkedList {
 
   public static final class Node {
     public int value;
@@ -35,13 +35,13 @@ public final class SingleLinkedList {
   Node tail;
   int length;
 
-  public SingleLinkedList() {
+  public SinglyLinkedList() {
     this.head = null;
     this.tail = null;
     this.length = 0;
   }
 
-  public SingleLinkedList(final int[] data) {
+  public SinglyLinkedList(final int[] data) {
     this();
     for (int index = 0; index < data.length; index++) {
       add(data[index]);
