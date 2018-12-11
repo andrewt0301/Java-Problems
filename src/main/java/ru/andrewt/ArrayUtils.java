@@ -49,16 +49,35 @@ public final class ArrayUtils {
 
     final int value = array[from];
     if (from < to) {
-      for (int index = from + 1; index <= to; ++index) {
-        array[index - 1] = array[index];
-      }
+      final int length = to - from;
+      shiftLow(array, from + 1, length);
     } else {
-      for (int index = from - 1; index >= to; --index) {
-        array[index + 1] = array[index];
-      }
+      final int length = from - to;
+      shiftHigh(array, to, length);
     }
-
     array[to] = value;
+  }
+
+  /**
+   * Shifts the specified subarray by one element towards higher indices.
+   *
+   * @param array Array.
+   * @param start Index of the starting element of the subarray to be shifted.
+   * @param length Length of the subarray to be shifted.
+   */
+  public static void shiftHigh(final int[] array, final int start, final int length) {
+    System.arraycopy(array, start, array, start + 1, length);
+  }
+
+  /**
+   * Shifts the specified subarray by one element towards lower indices.
+   *
+   * @param array Array.
+   * @param start Index of the starting element of the subarray to be shifted.
+   * @param length Length of the subarray to be shifted.
+   */
+  public static void shiftLow(final int[] array, final int start, final int length) {
+    System.arraycopy(array, start, array, start - 1, length);
   }
 
   /**
@@ -74,7 +93,7 @@ public final class ArrayUtils {
    * @param <T> Array element type.
    * @return Array of the specified type and length.
    */
-  public static <T> T[] newArray(final int length, final T ... old) {
+  public static <T> T[] newArray(final int length, final T... old) {
     return Arrays.copyOf(old, length);
   }
 
