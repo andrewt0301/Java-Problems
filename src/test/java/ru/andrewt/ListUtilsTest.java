@@ -17,7 +17,7 @@ package ru.andrewt;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ru.andrewt.SingleLinkedList.Node;
+import ru.andrewt.SinglyLinkedList.Node;
 
 public class ListUtilsTest {
 
@@ -42,11 +42,34 @@ public class ListUtilsTest {
       int cycleIndex = (int) dataItem[1];
       boolean expected = (boolean) dataItem[2];
 
-      Node list = ListUtils.newList(length, cycleIndex);
+      Node list = ListUtils.newCyclicList(length, cycleIndex);
       boolean cyclic = ListUtils.isCyclic(list);
 
       Assert.assertEquals(expected, cyclic);
     }
+  }
+
+  @Test
+  public void test_intersectSorted() {
+    Node list1 = ListUtils.asList(3, 5, 7, 8, 10, 13, 14, 15);
+    Node list2 = ListUtils.asList(2, 4, 5, 6,  8, 11, 13, 15);
+
+    Node list3 = ListUtils.intersectSorted(list1, list2);
+    Node head = list3;
+
+    final StringBuilder builder = new StringBuilder();
+    builder.append('[');
+
+    for (Node curr = head; curr != null; curr = curr.next) {
+      if (curr != head) {
+        builder.append(", ");
+      }
+      builder.append(curr.value);
+    }
+
+    builder.append(']');
+    System.out.println(builder.toString());
+
   }
 
 }

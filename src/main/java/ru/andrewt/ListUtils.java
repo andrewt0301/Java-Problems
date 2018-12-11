@@ -14,10 +14,10 @@
 
 package ru.andrewt;
 
-import ru.andrewt.SingleLinkedList.Node;
+import ru.andrewt.SinglyLinkedList.Node;
 
 /**
- * The {@link ListUtils} class provides utility methods to manipulate with linked lists.
+ * The {@link ListUtils} class provides utility methods to manipulate with singly linked lists.
  *
  * @author Andrei Tatarnikov
  */
@@ -53,22 +53,25 @@ public final class ListUtils {
     return false;
   }
 
+  /**
+   * Builds an intersection of two sorted linked lists.
+   *
+   * @param list1 Sorted lined lists.
+   * @param list2 Sorted lined lists.
+   * @return Intersection of two lists (sorted linked list).
+   */
   public static Node intersectSorted(final Node list1, final Node list2) {
-    Node head = null;
-    Node tail = null;
+    SinglyLinkedList result = new SinglyLinkedList();
 
     Node node1 = list1;
     Node node2 = list2;
 
     while (node1 != null && node2 != null) {
       if (node1.value == node2.value) {
-        Node newNode = new Node(node1.value, null);
-        if (tail == null) {
-          head = newNode;
-        } else {
-          tail.next = newNode;
-        }
-        tail = newNode;
+        result.add(node1.value);
+
+        node1 = node1.next;
+        node2 = node2.next;
       } else if (node1.value < node2.value) {
         node1 = node1.next;
       } else {
@@ -76,10 +79,18 @@ public final class ListUtils {
       }
     }
 
-    return head;
+    return result.head;
   }
 
-  public static Node newList(final int length, final int cycleIndex) {
+
+  /**
+   * Creates a singly linked list with a cycle on the specified node.
+   *
+   * @param length List length.
+   * @param cycleIndex Index of a node with a cycle (pointed by two other nodes).
+   * @return Singly linked list with a cycle.
+   */
+  public static Node newCyclicList(final int length, final int cycleIndex) {
     Node head = null;
     Node tail = null;
     Node cycle = null;
@@ -106,26 +117,13 @@ public final class ListUtils {
   }
 
   /**
-   * Constructs a single-linked list on the basis of the specified array of integers.
+   * Constructs a singly linked list on the basis of the specified array of integers.
    *
    * @param values Integer values.
    * @return Head of a single-linked list.
    */
-  public static Node asList(int... values) {
-    Node head = null;
-    Node tail = null;
-
-    for (final int value : values) {
-      final Node node = new Node(value, null);
-      if (tail == null) {
-        head = node;
-      } else {
-        tail.next = node;
-      }
-      tail = node;
-    }
-
-    return head;
+  public static Node asList(final int... values) {
+    return new SinglyLinkedList(values).head;
   }
 
 }
