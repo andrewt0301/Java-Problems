@@ -77,4 +77,36 @@ public class ArrayUtilsTest {
         ArrayUtils.shiftHigh(array, 3, 5);
         Assert.assertArrayEquals(new int[] {0, 1, 2, 3, 3, 4, 5, 6, 7, 9}, array);
     }
+
+    @Test
+    public void testShiftLow() {
+        final int[] initial = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        int[] array = Arrays.copyOf(initial, initial.length);
+        ArrayUtils.shiftLow(array, 1, 3);
+        Assert.assertArrayEquals(new int[] {1, 2, 3, 3, 4, 5, 6, 7, 8, 9}, array);
+
+        array = Arrays.copyOf(initial, initial.length);
+        ArrayUtils.shiftLow(array, 7, 3);
+        Assert.assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5, 7, 8, 9, 9}, array);
+
+        array = Arrays.copyOf(initial, initial.length);
+        ArrayUtils.shiftLow(array, 3, 5);
+        Assert.assertArrayEquals(new int[] {0, 1, 3, 4, 5, 6, 7, 7, 8, 9}, array);
+    }
+
+    @Test
+    public void testMove() {
+        final int[] array = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        ArrayUtils.move(array, 0, 9);
+        Assert.assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}, array);
+
+        ArrayUtils.move(array, 9, 0);
+        Assert.assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, array);
+
+        ArrayUtils.move(array, 3, 5);
+        Assert.assertArrayEquals(new int[] {0, 1, 2, 4, 5, 3, 6, 7, 8, 9}, array);
+    }
+
 }
