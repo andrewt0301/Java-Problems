@@ -16,9 +16,6 @@ package ru.andrewt;
 
 import java.util.Arrays;
 
-import static ru.andrewt.Utils.move;
-import static ru.andrewt.Utils.swap;
-
 /**
  * The {@link Sorting} class provides methods that implement various kinds of sorting algorithms.
  *
@@ -46,7 +43,7 @@ public final class Sorting {
       for (int j = data.length - 1; j > i; j--) {
         final int k = j - 1;
         if (data[j] < data[k]) {
-          swap(data, j, k);
+          ArrayUtils.swap(data, j, k);
         }
       }
     }
@@ -70,12 +67,12 @@ public final class Sorting {
 
     for (int index = start; index < end; index++) {
       if (data[index] <= pivot) {
-        swap(data, split, index);
+        ArrayUtils.swap(data, split, index);
         split++;
       }
     }
 
-    swap(data, split, end);
+    ArrayUtils.swap(data, split, end);
     return split;
   }
 
@@ -161,12 +158,17 @@ public final class Sorting {
    * @param mask Bit mask used for partitioning.
    */
   public static void partitionWithMask(final int[] data, final int mask) {
+    // End position of the first partition.
     int partitionIndex = 0;
+
     for (int index = 0; index < data.length; ++index) {
       final int value = data[index];
       if ((value & mask) == 0) {
         if (index > partitionIndex) {
-          move(data, index, partitionIndex);
+          // Moves the value to the first partition.
+          final int length = index - partitionIndex;
+          ArrayUtils.shiftHigh(data, partitionIndex, length);
+          data[partitionIndex] = value;
         }
         partitionIndex++;
       }
