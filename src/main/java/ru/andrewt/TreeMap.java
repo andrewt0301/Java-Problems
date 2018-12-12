@@ -14,7 +14,16 @@
 
 package ru.andrewt;
 
+/**
+ * The {@link TreeMap} class implements the binary search tree data structure.
+ *
+ * @param <K> Key type (must implement {@link Comparable}).
+ * @param <V> Value type.
+ *
+ * @author Andrei Tatarnikov
+ */
 public final class TreeMap<K extends Comparable<K>, V> {
+
   private static final class Node<K extends Comparable<K>, V> {
     final K key;
     V value;

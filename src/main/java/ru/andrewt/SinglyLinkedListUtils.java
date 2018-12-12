@@ -86,6 +86,7 @@ public final class SinglyLinkedListUtils {
 
   /**
    * Creates a singly linked list with a cycle on the specified node.
+   * Node values are numbers in the range {@code [0..length-1]}.
    *
    * @param length List length.
    * @param cycleIndex Index of a node with a cycle (pointed by two other nodes).
