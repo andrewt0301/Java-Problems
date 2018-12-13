@@ -1,9 +1,15 @@
 group 'andrewt'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 apply plugin: 'findbugs'
-apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -18,10 +24,6 @@ dependencies {
 
 findbugs {
     ignoreFailures = true
-}
-
-jacoco {
-    toolVersion = "0.7.5.201505241946"
 }
 
 jacocoTestReport {
