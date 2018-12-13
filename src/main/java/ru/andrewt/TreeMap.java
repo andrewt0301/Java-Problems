@@ -24,7 +24,7 @@ package ru.andrewt;
  */
 public final class TreeMap<K extends Comparable<K>, V> {
 
-  private static final class Node<K extends Comparable<K>, V> {
+  public static class Node<K extends Comparable<K>, V> {
     final K key;
     V value;
 
@@ -128,6 +128,30 @@ public final class TreeMap<K extends Comparable<K>, V> {
     return y;
   }
 
+  public V getPredecessor(K k) {
+    Node<K,V> x = search(root, k);
+    Node<K,V> y = predecessor(x);
+    return y.value;
+  }
+
+  private Node<K,V> predecessor(Node<K,V> x) {
+    if (x == NIL) {
+      return x;
+    }
+
+    if (x.left != NIL) {
+      return max(x.left);
+    }
+
+    Node<K,V> y = x.p;
+    while (y != NIL && x == y.left) {
+      x = y;
+      y = y.p;
+    }
+
+    return y;
+  }
+
   public V put(K k, V v) {
     Node<K,V> x = root;
     Node<K,V> y = (Node<K,V>) NIL;
@@ -205,19 +229,20 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public K[] getKeys() {
-    final K[] keys = ArrayUtils.newArray(size);
-    saveKeys(root, keys, 0);
-    return keys;
+    final K[] array = ArrayUtils.newArray(size);
+    keysToArray(root, array, 0);
+    return array;
   }
 
-  private static <K extends Comparable<K>, V> int saveKeys(
-        Node<K,V> node,
-        K[] keys,
-        int index) {
-    if (node != NIL) {
-      index = saveKeys(node.left, keys, index);
-      keys[index++] = node.key;
-      index = saveKeys(node.right, keys, index);
+  private static <K extends Comparable<K>, V> int keysToArray(
+        final Node<K,V> root,
+        final K[] array,
+        final int startIndex) {
+    int index = startIndex;
+    if (root != NIL) {
+      index = keysToArray(root.left, array, index);
+      array[index++] = root.key;
+      index = keysToArray(root.right, array, index);
     }
     return index;
   }
@@ -225,28 +250,28 @@ public final class TreeMap<K extends Comparable<K>, V> {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    saveToStringBuilder(sb, root, 0);
+    nodesToStringBuilder(sb, root, 0);
     return sb.toString();
   }
 
-  private static <K extends Comparable<K>, V> void saveToStringBuilder(
-        StringBuilder sb,
-        Node<K,V> node,
-        int level) {
-    if (node == NIL) {
+  private static <K extends Comparable<K>, V> void nodesToStringBuilder(
+        final StringBuilder sb,
+        final Node<K,V> root,
+        final int level) {
+    if (root == NIL) {
       return;
     }
 
-    saveToStringBuilder(sb, node.right, level + 1);
+    nodesToStringBuilder(sb, root.right, level + 1);
 
     final int offset = 4;
     for (int i = 0; i < offset * level; i++) {
       sb.append(' ');
     }
 
-    sb.append(String.format("[%s:%s]", node.key, node.value));
+    sb.append(String.format("[%s:%s]", root.key, root.value));
     sb.append(System.lineSeparator());
 
-    saveToStringBuilder(sb, node.left, level + 1);
+    nodesToStringBuilder(sb, root.left, level + 1);
   }
 }
