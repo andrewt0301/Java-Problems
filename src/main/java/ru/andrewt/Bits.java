@@ -15,7 +15,7 @@
 package ru.andrewt;
 
 /**
- * The {@code Bits} class provides utility methods for various bit manipulations.
+ * The {@link Bits} class provides utility methods for various bit manipulations.
  *
  * @author Andrei Tatarnikov
  */
