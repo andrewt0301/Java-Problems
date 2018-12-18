@@ -80,12 +80,7 @@ public class TreeMapTest {
     final int min = -10;
     final int max = 10;
 
-    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-
-    // Fills the map with numbers [min, max] coming in a random order.
-    for (final Integer key : newShuffledSet(min, max, 13)) {
-      treeMap.put(key, key);
-    }
+    final TreeMap<Integer, Integer> treeMap = newTreeMapForRange(min, max);
 
     // Updates all key values.
     Object[] keys = treeMap.getKeys();
@@ -106,17 +101,16 @@ public class TreeMapTest {
 
   @Test
   public void testMinMax() {
-    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+    final int min = -10;
+    final int max = 10;
 
-    for (int key = -10; key < 10; ++key) {
-      treeMap.put(key, key * 2);
-    }
+    final TreeMap<Integer, Integer> treeMap = newTreeMapForRange(min, max);
 
-    int min = treeMap.min();
-    int max = treeMap.max();
+    final int minValue = treeMap.min();
+    final int maxValue = treeMap.max();
 
-    Assert.assertEquals(-20, min);
-    Assert.assertEquals(18, max);
+    Assert.assertEquals(min, minValue);
+    Assert.assertEquals(max, maxValue);
   }
 
   @Test
@@ -124,12 +118,7 @@ public class TreeMapTest {
     final int min = -10;
     final int max = 10;
 
-    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-
-    // Fills the map with numbers [min, max] coming in a random order.
-    for (int key : newShuffledSet(min, max, 13)) {
-      treeMap.put(key, key);
-    }
+    final TreeMap<Integer, Integer> treeMap = newTreeMapForRange(min, max);
 
     // Corner cases.
     Assert.assertTrue(treeMap.getPredecessor(max) == (max - 1));
@@ -149,6 +138,35 @@ public class TreeMapTest {
       Assert.assertTrue((key + 1) == successor);
       Assert.assertTrue((key - 1) == predecessor);
     }
+  }
+
+  @Test
+  public void testContains() {
+    final int min = -10;
+    final int max = 10;
+
+    final TreeMap<Integer, Integer> treeMap = newTreeMapForRange(min, max);
+
+    for (int index = min; index <= max; ++index) {
+      Assert.assertTrue(treeMap.contains(index));
+    }
+
+    Assert.assertFalse(treeMap.contains(min - 1));
+    Assert.assertFalse(treeMap.contains(max + 1));
+    Assert.assertFalse(treeMap.contains(Integer.MIN_VALUE));
+    Assert.assertFalse(treeMap.contains(Integer.MAX_VALUE));
+    Assert.assertFalse(treeMap.contains(null));
+  }
+
+  // Fills the map with numbers [min, max] coming in a random order.
+  public static TreeMap<Integer, Integer> newTreeMapForRange(int min, int max) {
+    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+    for (int key : newShuffledSet(min, max, 13)) {
+      treeMap.put(key, key);
+    }
+
+    return treeMap;
   }
 
   public static Collection<Integer> newShuffledSet(final int min, final int max, final int seed) {
