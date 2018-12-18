@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -70,10 +71,37 @@ public class TreeMapTest {
     test.accept(new Integer[] {9, 0, 8, 1, 7, 2, 6, 3, 5, 4});
 
     // Keys are put in a random order (deterministic).
-    final List<Integer> keys = Arrays.asList(new Integer[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-
-    Collections.shuffle(keys, new Random(13));
+    final Collection<Integer> keys = newShuffledSet(0, 9, 13);
     test.accept(keys.toArray(new Integer[keys.size()]));
+  }
+
+  @Test
+  public void testPutUpdate() {
+    final int min = -10;
+    final int max = 10;
+
+    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+    // Fills the map with numbers [min, max] coming in a random order.
+    for (final Integer key : newShuffledSet(min, max, 13)) {
+      treeMap.put(key, key);
+    }
+
+    // Updates all key values.
+    Object[] keys = treeMap.getKeys();
+    for (int index = 0; index < keys.length; ++index) {
+      final Integer key = (Integer) keys[index];
+      final Integer value = treeMap.get(key);
+
+      Assert.assertEquals(value, key);
+      treeMap.put(key, value * 2);
+    }
+
+    // Checks all values in the range.
+    for (int index = min; index <= max; ++index) {
+      final int value = treeMap.get(index);
+      Assert.assertEquals(value, index * 2);
+    }
   }
 
   @Test
@@ -97,10 +125,9 @@ public class TreeMapTest {
     final int max = 10;
 
     final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-    final List<Integer> keys = newRandomOrderSet(min, max, 13);
 
     // Fills the map with numbers [min, max] coming in a random order.
-    for (int key : keys) {
+    for (int key : newShuffledSet(min, max, 13)) {
       treeMap.put(key, key);
     }
 
@@ -124,9 +151,9 @@ public class TreeMapTest {
     }
   }
 
-  public static List<Integer> newRandomOrderSet(final int min, final int max, final int seed) {
+  public static Collection<Integer> newShuffledSet(final int min, final int max, final int seed) {
     final int length = max - min + 1;
-    List<Integer> result = new ArrayList<>(length);
+    final List<Integer> result = new ArrayList<>(length);
 
     for (int key = min; key <= max; ++key) {
       result.add(key);
