@@ -189,12 +189,15 @@ public final class TreeMap<K extends Comparable<K>, V> {
     return null;
   }
 
-  public void remove(K k) {
+  public V remove(K k) {
     Node<K,V> z = search(root, k);
-    if (z != NIL) {
-      delete(z);
-      size--;
+    if (z == NIL) {
+      return null;
     }
+
+    delete(z);
+    size--;
+    return z.value;
   }
 
   private void delete(Node<K,V> z) {
