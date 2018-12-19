@@ -57,8 +57,8 @@ public class SinglyLinkedListUtilsTest {
 
   @Test
   public void testIntersectSorted() {
-    Node list1 = SinglyLinkedListUtils.asList(3, 5, 7, 8, 10, 13, 14, 15);
-    Node list2 = SinglyLinkedListUtils.asList(2, 4, 5, 6,  8, 11, 13, 15);
+    Node list1 = asList(3, 5, 7, 8, 10, 13, 14, 15);
+    Node list2 = asList(2, 4, 5, 6,  8, 11, 13, 15);
 
     Node list3 = SinglyLinkedListUtils.intersectSorted(list1, list2);
     Node head = list3;
@@ -75,6 +75,16 @@ public class SinglyLinkedListUtilsTest {
 
     builder.append(']');
     System.out.println(builder.toString());
+  }
+
+  /**
+   * Constructs a singly linked list on the basis of the specified array of integers.
+   *
+   * @param values Integer values.
+   * @return Head of a singly linked list.
+   */
+  public static Node asList(final int... values) {
+    return new SinglyLinkedList(values).head;
   }
 
 }

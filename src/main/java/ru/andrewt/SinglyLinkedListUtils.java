@@ -62,14 +62,19 @@ public final class SinglyLinkedListUtils {
    * @return Intersection of two lists (sorted linked list).
    */
   public static Node intersectSorted(final Node list1, final Node list2) {
-    SinglyLinkedList result = new SinglyLinkedList();
-
     Node node1 = list1;
     Node node2 = list2;
 
+    Node head = null;
+    Node tail = null;
+
     while (node1 != null && node2 != null) {
       if (node1.value == node2.value) {
-        result.add(node1.value);
+        final Node newNode = new Node(node1.value, null);
+        if (null == tail) {
+          head = newNode;
+        }
+        tail = newNode;
 
         node1 = node1.next;
         node2 = node2.next;
@@ -80,7 +85,7 @@ public final class SinglyLinkedListUtils {
       }
     }
 
-    return result.head;
+    return head;
   }
 
 
@@ -116,16 +121,6 @@ public final class SinglyLinkedListUtils {
     }
 
     return head;
-  }
-
-  /**
-   * Constructs a singly linked list on the basis of the specified array of integers.
-   *
-   * @param values Integer values.
-   * @return Head of a singly linked list.
-   */
-  public static Node asList(final int... values) {
-    return new SinglyLinkedList(values).head;
   }
 
 }

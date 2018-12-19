@@ -187,6 +187,42 @@ public class TreeMapTest {
     }
   }
 
+  @Test
+  public void testRemoveRoot() {
+    final int min = -10;
+    final int max = 10;
+
+    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+    // Inserting from min to max.
+    for (int key = min; key < max; ++key) {
+      treeMap.put(key, key);
+    }
+
+    for (Integer key = min; key < max; ++key) {
+      final int size = treeMap.size();
+      final Integer value = treeMap.remove(key);
+      Assert.assertEquals(key, value);
+      Assert.assertEquals(size - 1, treeMap.size());
+    }
+
+    Assert.assertTrue(treeMap.isEmpty());
+
+    // Inserting from max to min.
+    for (int key = max; key < min; --key) {
+      treeMap.put(key, key);
+    }
+
+    for (Integer key = max; key < min; --key) {
+      final int size = treeMap.size();
+      final Integer value = treeMap.remove(key);
+      Assert.assertEquals(key, value);
+      Assert.assertEquals(size - 1, treeMap.size());
+    }
+
+    Assert.assertTrue(treeMap.isEmpty());
+  }
+
   // Fills the map with numbers [min, max] coming in a random order.
   public static TreeMap<Integer, Integer> newTreeMapForRange(int min, int max) {
     final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
