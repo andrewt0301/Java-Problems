@@ -68,17 +68,16 @@ public final class SinglyLinkedList {
   }
 
   public int get(final int index) {
-    checkBounds(index);
-
-    Node node = head;
-    for (int i = 0; i < index; i++) {
-      node = node.next;
-    }
-
+    final Node node = getNode(index);
     return node.value;
   }
 
   public void set(final int index, final int value) {
+    final Node node = getNode(index);
+    node.value = value;
+  }
+
+  private Node getNode(final int index) {
     checkBounds(index);
 
     Node node = head;
@@ -86,7 +85,7 @@ public final class SinglyLinkedList {
       node = node.next;
     }
 
-    node.value = value;
+    return node;
   }
 
   public void insertAt(final int index, final int value) {
