@@ -223,6 +223,29 @@ public class TreeMapTest {
     Assert.assertTrue(treeMap.isEmpty());
   }
 
+  @Test
+  public void testToString() {
+    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+    Assert.assertTrue(treeMap.toString().isEmpty());
+
+    treeMap.put(123, 321);
+    Assert.assertEquals("[123:321]" + System.lineSeparator(), treeMap.toString());
+
+    treeMap.put(122, 221);
+    treeMap.put(125, 521);
+    treeMap.put(121, 121);
+    treeMap.put(126, 621);
+
+    final String expected =
+        "        [126:621]" + System.lineSeparator() +
+        "    [125:521]" + System.lineSeparator() +
+        "[123:321]" + System.lineSeparator() +
+        "    [122:221]" + System.lineSeparator() +
+        "        [121:121]"  + System.lineSeparator();
+
+    Assert.assertEquals(expected, treeMap.toString());
+  }
+
   // Fills the map with numbers [min, max] coming in a random order.
   public static TreeMap<Integer, Integer> newTreeMapForRange(int min, int max) {
     final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
