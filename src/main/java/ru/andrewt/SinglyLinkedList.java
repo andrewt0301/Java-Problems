@@ -17,22 +17,14 @@ package ru.andrewt;
 /**
  * The {@link SinglyLinkedList} class implements the singly linked list data structure.
  *
+ * @param <T> Type of elements stored in the list.
+ *
  * @author Andrei Tatarnikov
  */
-public final class SinglyLinkedList {
+public final class SinglyLinkedList<T> {
 
-  public static final class Node {
-    public int value;
-    public Node next;
-
-    public Node(final int value, final Node next) {
-      this.value = value;
-      this.next = next;
-    }
-  }
-
-  Node head;
-  Node tail;
+  ListNode<T> head;
+  ListNode<T> tail;
   int length;
 
   public SinglyLinkedList() {
@@ -41,10 +33,10 @@ public final class SinglyLinkedList {
     this.length = 0;
   }
 
-  public SinglyLinkedList(final int[] data) {
+  public SinglyLinkedList(final T... values) {
     this();
-    for (int index = 0; index < data.length; index++) {
-      add(data[index]);
+    for (int index = 0; index < values.length; index++) {
+      add(values[index]);
     }
   }
 
@@ -56,8 +48,8 @@ public final class SinglyLinkedList {
     return length;
   }
 
-  public void add(final int value) {
-    final Node node = new Node(value, null);
+  public void add(final T value) {
+    final ListNode<T> node = new ListNode<>(value, null);
     if (tail == null) {
       head = node;
     } else {
@@ -67,20 +59,20 @@ public final class SinglyLinkedList {
     length++;
   }
 
-  public int get(final int index) {
-    final Node node = getNode(index);
+  public T get(final int index) {
+    final ListNode<T> node = getNode(index);
     return node.value;
   }
 
-  public void set(final int index, final int value) {
-    final Node node = getNode(index);
+  public void set(final int index, final T value) {
+    final ListNode<T> node = getNode(index);
     node.value = value;
   }
 
-  private Node getNode(final int index) {
+  private ListNode<T> getNode(final int index) {
     checkBounds(index);
 
-    Node node = head;
+    ListNode<T> node = head;
     for (int i = 0; i < index; i++) {
       node = node.next;
     }
@@ -88,7 +80,7 @@ public final class SinglyLinkedList {
     return node;
   }
 
-  public void insertAt(final int index, final int value) {
+  public void insertAt(final int index, final T value) {
     if (index == length) {
       add(value);
       return;
@@ -96,15 +88,15 @@ public final class SinglyLinkedList {
 
     checkBounds(index);
 
-    Node prev = null;
-    Node curr = head;
+    ListNode<T> prev = null;
+    ListNode<T> curr = head;
 
     for (int i = 0; i < index; i++) {
       prev = curr;
       curr = curr.next;
     }
 
-    final Node node = new Node(value, curr);
+    final ListNode<T> node = new ListNode<>(value, curr);
 
     if (prev == null) {
       head = node;
@@ -118,8 +110,8 @@ public final class SinglyLinkedList {
   public void removeAt(final int index) {
     checkBounds(index);
 
-    Node prev = null;
-    Node curr = head;
+    ListNode<T> prev = null;
+    ListNode<T> curr = head;
 
     for (int i = 0; i < index; i++) {
       prev = curr;
@@ -140,11 +132,11 @@ public final class SinglyLinkedList {
   }
 
   public void reverse() {
-    Node newHead = null;
-    Node curr = head;
+    ListNode<T> newHead = null;
+    ListNode<T> curr = head;
 
     while (curr != null) {
-      final Node node = curr;
+      final ListNode<T> node = curr;
       curr = curr.next;
 
       node.next = newHead;
@@ -154,11 +146,11 @@ public final class SinglyLinkedList {
     head = newHead;
   }
 
-  public int[] toArray() {
-    final int[] array = new int[length];
+  public T[] toArray() {
+    final T[] array = ArrayUtils.newArray(length);
 
     int index = 0;
-    for (Node curr = head; curr != null; curr = curr.next) {
+    for (ListNode<T> curr = head; curr != null; curr = curr.next) {
       array[index++] = curr.value;
     }
 
@@ -170,7 +162,7 @@ public final class SinglyLinkedList {
     final StringBuilder builder = new StringBuilder();
     builder.append('[');
 
-    for (Node curr = head; curr != null; curr = curr.next) {
+    for (ListNode<T> curr = head; curr != null; curr = curr.next) {
       if (curr != head) {
         builder.append(", ");
       }

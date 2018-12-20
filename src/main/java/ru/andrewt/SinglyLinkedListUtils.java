@@ -14,8 +14,6 @@
 
 package ru.andrewt;
 
-import ru.andrewt.SinglyLinkedList.Node;
-
 /**
  * The {@link SinglyLinkedListUtils} class provides utility methods to manipulate
  * with singly linked lists.
@@ -33,11 +31,12 @@ public final class SinglyLinkedListUtils {
    * (the list is cyclic) or the end of the list is reached (the list is non-cyclic).</p>
    *
    * @param head Head of a singly linked list.
+   * @param <T> Type of values stored in the list.
    * @return {@code true} if the list if cyclic or {@code false} otherwise.
    */
-  public static boolean isCyclic(Node head) {
-    Node fast = head;
-    Node slow = head;
+  public static <T> boolean isCyclic(ListNode<T> head) {
+    ListNode<T> fast = head;
+    ListNode<T> slow = head;
 
     while (fast != null) {
       fast = fast.next;
@@ -61,16 +60,18 @@ public final class SinglyLinkedListUtils {
    * @param list2 Sorted lined lists.
    * @return Intersection of two lists (sorted linked list).
    */
-  public static Node intersectSorted(final Node list1, final Node list2) {
-    Node node1 = list1;
-    Node node2 = list2;
+  public static <T extends Comparable<T>> ListNode<T> intersectSorted(
+      final ListNode<T> list1,
+      final ListNode<T> list2) {
+    ListNode<T> node1 = list1;
+    ListNode<T> node2 = list2;
 
-    Node head = null;
-    Node tail = null;
+    ListNode<T> head = null;
+    ListNode<T> tail = null;
 
     while (node1 != null && node2 != null) {
       if (node1.value == node2.value) {
-        final Node newNode = new Node(node1.value, null);
+        final ListNode<T> newNode = new ListNode<>(node1.value, null);
         if (null == tail) {
           head = newNode;
         }
@@ -78,7 +79,7 @@ public final class SinglyLinkedListUtils {
 
         node1 = node1.next;
         node2 = node2.next;
-      } else if (node1.value < node2.value) {
+      } else if (node1.value.compareTo(node2.value) < 0) {
         node1 = node1.next;
       } else {
         node2 = node2.next;
@@ -88,22 +89,21 @@ public final class SinglyLinkedListUtils {
     return head;
   }
 
-
   /**
    * Creates a singly linked list with a cycle on the specified node.
-   * Node values are numbers in the range {@code [0..length-1]}.
+   * Node values are integer numbers in the range {@code [0..length-1]}.
    *
    * @param length List length.
    * @param cycleIndex Index of a node with a cycle (pointed by two other nodes).
    * @return Singly linked list with a cycle.
    */
-  public static Node newCyclicList(final int length, final int cycleIndex) {
-    Node head = null;
-    Node tail = null;
-    Node cycle = null;
+  public static ListNode<Integer> newCyclicList(final int length, final int cycleIndex) {
+    ListNode<Integer> head = null;
+    ListNode<Integer> tail = null;
+    ListNode<Integer> cycle = null;
 
     for (int index = length - 1; index >= 0; --index) {
-      final Node node = new Node(index, head);
+      final ListNode<Integer> node = new ListNode<>(index, head);
 
       if (head == null) {
         tail = node;

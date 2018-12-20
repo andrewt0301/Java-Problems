@@ -17,8 +17,6 @@ package ru.andrewt;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ru.andrewt.SinglyLinkedList.Node;
-
 /**
  * The {@link SinglyLinkedListUtilsTest} class contains tests for the {@link SinglyLinkedListUtils}
  * class methods.
@@ -48,7 +46,7 @@ public class SinglyLinkedListUtilsTest {
       int cycleIndex = (int) dataItem[1];
       boolean expected = (boolean) dataItem[2];
 
-      Node list = SinglyLinkedListUtils.newCyclicList(length, cycleIndex);
+      ListNode<Integer> list = SinglyLinkedListUtils.newCyclicList(length, cycleIndex);
       boolean cyclic = SinglyLinkedListUtils.isCyclic(list);
 
       Assert.assertEquals(expected, cyclic);
@@ -57,16 +55,16 @@ public class SinglyLinkedListUtilsTest {
 
   @Test
   public void testIntersectSorted() {
-    Node list1 = asList(3, 5, 7, 8, 10, 13, 14, 15);
-    Node list2 = asList(2, 4, 5, 6,  8, 11, 13, 15);
+    ListNode<Integer> list1 = asList(3, 5, 7, 8, 10, 13, 14, 15);
+    ListNode<Integer> list2 = asList(2, 4, 5, 6,  8, 11, 13, 15);
 
-    Node list3 = SinglyLinkedListUtils.intersectSorted(list1, list2);
-    Node head = list3;
+    ListNode<Integer> list3 = SinglyLinkedListUtils.intersectSorted(list1, list2);
+    ListNode<Integer> head = list3;
 
     final StringBuilder builder = new StringBuilder();
     builder.append('[');
 
-    for (Node curr = head; curr != null; curr = curr.next) {
+    for (ListNode<Integer> curr = head; curr != null; curr = curr.next) {
       if (curr != head) {
         builder.append(", ");
       }
@@ -81,10 +79,11 @@ public class SinglyLinkedListUtilsTest {
    * Constructs a singly linked list on the basis of the specified array of integers.
    *
    * @param values Integer values.
+   * @param <T> Type of values stored in the list.
    * @return Head of a singly linked list.
    */
-  public static Node asList(final int... values) {
-    return new SinglyLinkedList(values).head;
+  public static <T> ListNode<T> asList(final T... values) {
+    return new SinglyLinkedList<>(values).head;
   }
 
 }
