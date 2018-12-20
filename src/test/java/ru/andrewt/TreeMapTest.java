@@ -187,6 +187,35 @@ public class TreeMapTest {
     }
   }
 
+  /**
+   * Covers specific cases.
+   */
+  @Test
+  public void testRemoveDirected() {
+    // Removing nodes with no children.
+    final TreeMap<Integer, Integer> treeMap1 = newTreeMapForArray(5, 3, 7);
+    treeMap1.remove(3);
+    treeMap1.remove(7);
+    Assert.assertArrayEquals(new Integer[] {5}, treeMap1.getKeys());
+
+    // Removing nodes with a single child.
+    final TreeMap<Integer, Integer> treeMap2 = newTreeMapForArray(5, 3, 7, 9, 8, 1, 2);
+    treeMap2.remove(9);
+    treeMap2.remove(7);
+    treeMap2.remove(1);
+    treeMap2.remove(3);
+    Assert.assertArrayEquals(new Integer[] {2, 5, 8}, treeMap2.getKeys());
+
+    // Removing nodes with both children.
+    final TreeMap<Integer, Integer> treeMap3 =
+          newTreeMapForArray(5, 2, 7, 6, 10, 8, 9, 3, 4, 1, 0);
+    // Replacement is an immediate child.
+    treeMap3.remove(2);
+    // Replacement is not an immediate child.
+    treeMap3.remove(7);
+    Assert.assertArrayEquals(new Integer[] {0, 1, 3, 4, 5, 6, 8, 9, 10}, treeMap3.getKeys());
+  }
+
   @Test
   public void testRemoveRoot() {
     final int min = -10;
@@ -244,6 +273,17 @@ public class TreeMapTest {
         "        [121:121]"  + System.lineSeparator();
 
     Assert.assertEquals(expected, treeMap.toString());
+  }
+
+  // Fills the map with specific elements.
+  public static TreeMap<Integer, Integer> newTreeMapForArray(final int... keys) {
+    final TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+    for (int key : keys) {
+      treeMap.put(key, key);
+    }
+
+    return treeMap;
   }
 
   // Fills the map with numbers [min, max] coming in a random order.
