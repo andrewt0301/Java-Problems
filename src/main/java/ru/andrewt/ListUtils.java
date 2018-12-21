@@ -15,13 +15,12 @@
 package ru.andrewt;
 
 /**
- * The {@link SinglyLinkedListUtils} class provides utility methods to manipulate
- * with singly linked lists.
+ * The {@link ListUtils} class provides utility methods to manipulate with linked lists.
  *
  * @author Andrei Tatarnikov
  */
-public final class SinglyLinkedListUtils {
-  private SinglyLinkedListUtils() {}
+public final class ListUtils {
+  private ListUtils() {}
 
   /**
    * Checks whether the specified singly inked list is cyclic.
@@ -54,7 +53,7 @@ public final class SinglyLinkedListUtils {
   }
 
   /**
-   * Builds an intersection of two sorted linked lists.
+   * Builds an intersection of two sorted singly linked lists.
    *
    * @param list1 Sorted lined lists.
    * @param list2 Sorted lined lists.

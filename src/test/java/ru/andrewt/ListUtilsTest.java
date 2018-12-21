@@ -18,12 +18,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * The {@link SinglyLinkedListUtilsTest} class contains tests for the {@link SinglyLinkedListUtils}
+ * The {@link ListUtilsTest} class contains tests for the {@link ListUtils}
  * class methods.
  *
  * @author Andrei Tatarnikov
  */
-public class SinglyLinkedListUtilsTest {
+public class ListUtilsTest {
 
   @Test
   public void test_isCyclic() {
@@ -46,8 +46,8 @@ public class SinglyLinkedListUtilsTest {
       int cycleIndex = (int) dataItem[1];
       boolean expected = (boolean) dataItem[2];
 
-      ListNode<Integer> list = SinglyLinkedListUtils.newCyclicList(length, cycleIndex);
-      boolean cyclic = SinglyLinkedListUtils.isCyclic(list);
+      ListNode<Integer> list = ListUtils.newCyclicList(length, cycleIndex);
+      boolean cyclic = ListUtils.isCyclic(list);
 
       Assert.assertEquals(expected, cyclic);
     }
@@ -58,7 +58,7 @@ public class SinglyLinkedListUtilsTest {
     ListNode<Integer> list1 = asList(3, 5, 7, 8, 10, 13, 14, 15);
     ListNode<Integer> list2 = asList(2, 4, 5, 6,  8, 11, 13, 15);
 
-    ListNode<Integer> list3 = SinglyLinkedListUtils.intersectSorted(list1, list2);
+    ListNode<Integer> list3 = ListUtils.intersectSorted(list1, list2);
     ListNode<Integer> head = list3;
 
     final StringBuilder builder = new StringBuilder();
