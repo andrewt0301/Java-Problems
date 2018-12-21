@@ -24,27 +24,13 @@ package ru.andrewt;
  */
 public final class TreeMap<K extends Comparable<K>, V> {
 
-  public static class Node<K extends Comparable<K>, V> {
-    final K key;
-    V value;
+  private static final TreeNode<?,?> NIL = new TreeNode<>(null, null);
 
-    Node p;
-    Node left;
-    Node right;
-
-    Node(K key, V value) {
-      this.key = key;
-      this.value = value;
-    }
-  }
-
-  private static final Node<?,?> NIL = new Node<>(null, null);
-
-  private Node<K,V> root;
+  private TreeNode<K,V> root;
   private int size;
 
   public TreeMap() {
-    this.root = (Node<K, V>) NIL;
+    this.root = (TreeNode<K, V>) NIL;
     this.size = 0;
   }
 
@@ -57,7 +43,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V get(K k) {
-    Node<K,V> x = search(root, k);
+    TreeNode<K,V> x = search(root, k);
     return x.value;
   }
 
@@ -65,9 +51,9 @@ public final class TreeMap<K extends Comparable<K>, V> {
     return search(root, k) != NIL;
   }
 
-  private Node<K,V> search(Node<K,V> x, K k) {
+  private TreeNode<K,V> search(TreeNode<K,V> x, K k) {
     if (k == null) {
-      return (Node<K,V>) NIL;
+      return (TreeNode<K,V>) NIL;
     }
 
     while (x != NIL && !k.equals(x.key)) {
@@ -81,11 +67,11 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V min() {
-    Node<K, V> x = min(root);
+    TreeNode<K, V> x = min(root);
     return x.value;
   }
 
-  private Node<K, V> min(Node<K, V> x) {
+  private TreeNode<K, V> min(TreeNode<K, V> x) {
     while (x.left != NIL) {
       x = x.left;
     }
@@ -93,11 +79,11 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V max() {
-    Node<K, V> x = max(root);
+    TreeNode<K, V> x = max(root);
     return x.value;
   }
 
-  private Node<K, V> max(Node<K, V> x) {
+  private TreeNode<K, V> max(TreeNode<K, V> x) {
     while (x.right != NIL) {
       x = x.right;
     }
@@ -105,12 +91,12 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V getSuccessor(K k) {
-    Node<K,V> x = search(root, k);
-    Node<K,V> y = successor(x);
+    TreeNode<K,V> x = search(root, k);
+    TreeNode<K,V> y = successor(x);
     return y.value;
   }
 
-  private Node<K,V> successor(Node<K,V> x) {
+  private TreeNode<K,V> successor(TreeNode<K,V> x) {
     if (x == NIL) {
       return x;
     }
@@ -119,7 +105,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
       return min(x.right);
     }
 
-    Node<K,V> y = x.p;
+    TreeNode<K,V> y = x.p;
     while (y != NIL && x == y.right) {
       x = y;
       y = y.p;
@@ -129,12 +115,12 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V getPredecessor(K k) {
-    Node<K,V> x = search(root, k);
-    Node<K,V> y = predecessor(x);
+    TreeNode<K,V> x = search(root, k);
+    TreeNode<K,V> y = predecessor(x);
     return y.value;
   }
 
-  private Node<K,V> predecessor(Node<K,V> x) {
+  private TreeNode<K,V> predecessor(TreeNode<K,V> x) {
     if (x == NIL) {
       return x;
     }
@@ -143,7 +129,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
       return max(x.left);
     }
 
-    Node<K,V> y = x.p;
+    TreeNode<K,V> y = x.p;
     while (y != NIL && x == y.left) {
       x = y;
       y = y.p;
@@ -153,8 +139,8 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V put(K k, V v) {
-    Node<K,V> x = root;
-    Node<K,V> y = (Node<K,V>) NIL;
+    TreeNode<K,V> x = root;
+    TreeNode<K,V> y = (TreeNode<K,V>) NIL;
 
     while (x != NIL && !k.equals(x.key)) {
       y = x;
@@ -171,11 +157,11 @@ public final class TreeMap<K extends Comparable<K>, V> {
       return prev;
     }
 
-    Node<K,V> z = new Node<>(k, v);
+    TreeNode<K,V> z = new TreeNode<>(k, v);
 
     z.p = y;
-    z.right = NIL;
-    z.left = NIL;
+    z.right = (TreeNode<K,V>) NIL;
+    z.left = (TreeNode<K,V>) NIL;
 
     if (y == NIL) {
       root = z;
@@ -190,7 +176,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   public V remove(K k) {
-    Node<K,V> z = search(root, k);
+    TreeNode<K,V> z = search(root, k);
     if (z == NIL) {
       return null;
     }
@@ -200,13 +186,13 @@ public final class TreeMap<K extends Comparable<K>, V> {
     return z.value;
   }
 
-  private void delete(Node<K,V> z) {
+  private void delete(TreeNode<K,V> z) {
     if (z.left == NIL) {
       transplant(z, z.right);
     } else if (z.right == NIL) {
       transplant(z, z.left);
     } else {
-      Node<K,V> y = min(z.right);
+      TreeNode<K,V> y = min(z.right);
       if (y.p != z) {
         transplant(y, y.right);
         y.right = z.right;
@@ -218,7 +204,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
     }
   }
 
-  private void transplant(Node<K,V> u, Node<K,V> v) {
+  private void transplant(TreeNode<K,V> u, TreeNode<K,V> v) {
     if (u.p == NIL) {
       root = v;
     } else if (u == u.p.left) {
@@ -238,7 +224,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
   }
 
   private static <K extends Comparable<K>, V> int keysToArray(
-        final Node<K,V> root,
+        final TreeNode<K,V> root,
         final K[] array,
         final int startIndex) {
     int index = startIndex;
@@ -259,7 +245,7 @@ public final class TreeMap<K extends Comparable<K>, V> {
 
   private static <K extends Comparable<K>, V> void nodesToStringBuilder(
         final StringBuilder sb,
-        final Node<K,V> root,
+        final TreeNode<K,V> root,
         final int level) {
     if (root == NIL) {
       return;
