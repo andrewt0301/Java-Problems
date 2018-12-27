@@ -1,16 +1,3 @@
-/*
- * Copyright 2018 AndrewT (https://github.com/andrewt0301)
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
 
 package ru.andrewt;
 
@@ -57,6 +44,7 @@ public final class ListUtils {
    *
    * @param list1 Sorted lined lists.
    * @param list2 Sorted lined lists.
+   * @param <T> Type of values stored in the list.
    * @return Intersection of two lists (sorted linked list).
    */
   public static <T extends Comparable<T>> ListNode<T> intersectSorted(
@@ -120,6 +108,47 @@ public final class ListUtils {
     }
 
     return head;
+  }
+
+  /**
+   * Saves a linked list into an array.
+   *
+   * @param head Head of the linked list.
+   * @param length Length of the list.
+   * @param <T> Type of values stored in the list.
+   * @return Array of elements stored in the list.
+   */
+  public static <T> T[] toArray(final ListNode<T> head, final int length) {
+    final T[] array = ArrayUtils.newArray(length);
+
+    int index = 0;
+    for (ListNode<T> curr = head; curr != null; curr = curr.next) {
+      array[index++] = curr.value;
+    }
+
+    return array;
+  }
+
+  /**
+   * Prints a linked list to a string.
+   *
+   * @param head Head of the linked list.
+   * @param <T> Type of values stored in the list.
+   * @return String representation of the list.
+   */
+  public static <T> String toString(final ListNode<T> head) {
+    final StringBuilder builder = new StringBuilder();
+    builder.append('[');
+
+    for (ListNode<T> node = head; node != null; node = node.next) {
+      if (node != head) {
+        builder.append(", ");
+      }
+      builder.append(node.value);
+    }
+
+    builder.append(']');
+    return builder.toString();
   }
 
 }
