@@ -16,7 +16,15 @@ public class ListQueue<T> {
   ListNode<T> tail;
   int length;
 
-  public void Queue() {
+  public ListQueue(final T... values) {
+    this();
+
+    for (int index = 0; index < values.length; index++) {
+      enqueue(values[index]);
+    }
+  }
+
+  public ListQueue() {
     this.head = null;
     this.head = tail;
     this.length = 0;

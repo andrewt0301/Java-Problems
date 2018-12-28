@@ -1,3 +1,4 @@
+
 package ru.andrewt;
 
 import java.util.NoSuchElementException;
@@ -14,7 +15,15 @@ public class ListStack<T> {
   ListNode<T> head;
   int length;
 
-  public void Stack() {
+  public ListStack(final T... values) {
+    this();
+
+    for (int index = 0; index < values.length; index++) {
+      push(values[index]);
+    }
+  }
+
+  public ListStack() {
     this.head = null;
     this.length = 0;
   }
