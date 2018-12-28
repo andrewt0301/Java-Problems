@@ -1,21 +1,24 @@
+
 package ru.andrewt;
 
 import java.util.NoSuchElementException;
 
 /**
- * The {@link Stack} class is an implementation of the stack data structure based on a linked list.
+ * The {@link ListQueue} class is an implementation of the queue data structure based on a linked list.
  *
- * @param <T> Type of elements stored in the stack.
+ * @param <T> Type of elements stored in the queue.
  *
  * @author Andrei Tatarnikov
  */
-public class Stack<T> {
+public class ListQueue<T> {
 
   ListNode<T> head;
+  ListNode<T> tail;
   int length;
 
-  public void Stack() {
+  public void Queue() {
     this.head = null;
+    this.head = tail;
     this.length = 0;
   }
 
@@ -27,20 +30,28 @@ public class Stack<T> {
     return length;
   }
 
-  public void push(T value) {
-    ListNode<T> node = new ListNode<>(value, head);
-    head = node;
+  public void enqueue(T value) {
+    ListNode<T> node = new ListNode<>(value, null);
+
+    if (null == tail) {
+      head = node;
+    }
+    else {
+      tail.next = node;
+    }
+
+    tail = node;
     ++length;
   }
 
-  public T peek() {
+  public T peekFirst() {
     if (null == head) {
       throw new NoSuchElementException();
     }
     return head.value;
   }
 
-  public T pop() {
+  public T dequeue() {
     if (null == head) {
       throw new NoSuchElementException();
     }
@@ -48,6 +59,13 @@ public class Stack<T> {
     T value = head.value;
     head = head.next;
     return value;
+  }
+
+  public T peekLast() {
+    if (null == tail) {
+      throw new NoSuchElementException();
+    }
+    return tail.value;
   }
 
   public T[] toArray() {
