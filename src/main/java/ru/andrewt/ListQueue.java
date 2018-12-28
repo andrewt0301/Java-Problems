@@ -43,8 +43,7 @@ public class ListQueue<T> {
 
     if (null == tail) {
       head = node;
-    }
-    else {
+    } else {
       tail.next = node;
     }
 
