@@ -26,7 +26,7 @@ public class ListQueue<T> {
 
   public ListQueue() {
     this.head = null;
-    this.head = tail;
+    this.tail = null;
     this.length = 0;
   }
 
@@ -39,7 +39,7 @@ public class ListQueue<T> {
   }
 
   public void enqueue(T value) {
-    ListNode<T> node = new ListNode<>(value, null);
+    final ListNode<T> node = new ListNode<>(value, null);
 
     if (null == tail) {
       head = node;
@@ -52,7 +52,7 @@ public class ListQueue<T> {
     ++length;
   }
 
-  public T peekFirst() {
+  public T peek() {
     if (null == head) {
       throw new NoSuchElementException();
     }
@@ -64,16 +64,9 @@ public class ListQueue<T> {
       throw new NoSuchElementException();
     }
 
-    T value = head.value;
+    final T value = head.value;
     head = head.next;
     return value;
-  }
-
-  public T peekLast() {
-    if (null == tail) {
-      throw new NoSuchElementException();
-    }
-    return tail.value;
   }
 
   public T[] toArray() {

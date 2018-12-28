@@ -37,8 +37,7 @@ public class ListStack<T> {
   }
 
   public void push(T value) {
-    ListNode<T> node = new ListNode<>(value, head);
-    head = node;
+    head = new ListNode<>(value, head);;
     ++length;
   }
 
@@ -54,7 +53,7 @@ public class ListStack<T> {
       throw new NoSuchElementException();
     }
 
-    T value = head.value;
+    final T value = head.value;
     head = head.next;
     return value;
   }
