@@ -10,9 +10,9 @@ package ru.andrewt;
  */
 public class ListNode<T> {
   public T value;
-  public ListNode next;
+  public ListNode<T> next;
 
-  public ListNode(final T value, final ListNode next) {
+  public ListNode(final T value, final ListNode<T> next) {
     this.value = value;
     this.next = next;
   }
