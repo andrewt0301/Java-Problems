@@ -8,11 +8,11 @@ package ru.andrewt;
  *
  * @author Andrei Tatarnikov
  */
-public final class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> {
 
-  ListNode<T> head;
-  ListNode<T> tail;
-  int length;
+  protected ListNode<T> head;
+  protected ListNode<T> tail;
+  protected int length;
 
   public SinglyLinkedList() {
     this.head = null;

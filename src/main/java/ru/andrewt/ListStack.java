@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
  */
 public class ListStack<T> {
 
-  ListNode<T> head;
-  int length;
+  protected ListNode<T> head;
+  protected int length;
 
   public ListStack(final T... values) {
     this();

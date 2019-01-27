@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
  */
 public class ListQueue<T> {
 
-  ListNode<T> head;
-  ListNode<T> tail;
-  int length;
+  protected ListNode<T> head;
+  protected ListNode<T> tail;
+  protected int length;
 
   public ListQueue(final T... values) {
     this();
