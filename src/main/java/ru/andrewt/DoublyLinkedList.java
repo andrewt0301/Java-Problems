@@ -75,24 +75,63 @@ public class DoublyLinkedList<T> {
     node.value = value;
   }
 
-  private ListNode<T> getNode(final int index) {
+  private Node<T> getNode(final int index) {
     checkBounds(index);
 
+    Node<T> node;
     if (index < length / 2) {
       // Looking up from head.
-      ListNode<T> node = head;
+      node = head;
       for (int i = 0; i < index; i++) {
-        node = node.next;
+        node = (Node<T>) node.next;
       }
-      return node;
     } else {
       // Looking up from tail.
-      Node<T> node = tail;
+      node = tail;
       for (int i = length - 1; i > index; i--) {
         node = node.prev;
       }
-      return node;
     }
+    return node;
+  }
+
+  public void insertAt(final int index, final T value) {
+
+    if (index == length) {
+      add(value);
+      return;
+    }
+
+    if (index == 0) {
+      head = new Node<>(value, null, head);
+    } else {
+      Node<T> node = getNode(index);
+      Node<T> newNode = new Node<>(value, node.prev, node);
+
+      node.prev.next = newNode;
+      node.prev = newNode;
+    }
+
+    length++;
+  }
+
+  public void removeAt(final int index) {
+
+    Node<T> node = getNode(index);
+
+    if (node == head) {
+      head = (Node<T>) head.next;
+    } else {
+      node.prev.next = node.next;
+    }
+
+    if (node == tail) {
+      tail = node.prev;
+    } else {
+      ((Node<T>) node.next).prev = (Node<T>) node.next;
+    }
+
+    length--;
   }
 
   public T[] toArray() {
