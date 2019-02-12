@@ -59,6 +59,10 @@ public class SinglyLinkedList<T> {
   private ListNode<T> getNode(final int index) {
     checkBounds(index);
 
+    if (index == length - 1) {
+      return tail;
+    }
+
     ListNode<T> node = head;
     for (int i = 0; i < index; i++) {
       node = node.next;
@@ -116,6 +120,20 @@ public class SinglyLinkedList<T> {
     }
 
     length--;
+  }
+
+  public T getFirst() {
+    if (head == null) {
+      throw new IndexOutOfBoundsException();
+    }
+    return head.value;
+  }
+
+  public T getLast() {
+    if (tail == null) {
+      throw new IndexOutOfBoundsException();
+    }
+    return tail.value;
   }
 
   public void reverse() {

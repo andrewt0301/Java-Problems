@@ -116,7 +116,6 @@ public class DoublyLinkedList<T> {
   }
 
   public void removeAt(final int index) {
-
     Node<T> node = getNode(index);
 
     if (node == head) {
@@ -132,6 +131,20 @@ public class DoublyLinkedList<T> {
     }
 
     length--;
+  }
+
+  public T getFirst() {
+    if (head == null) {
+      throw new IndexOutOfBoundsException();
+    }
+    return head.value;
+  }
+
+  public T getLast() {
+    if (tail == null) {
+      throw new IndexOutOfBoundsException();
+    }
+    return tail.value;
   }
 
   public T[] toArray() {
