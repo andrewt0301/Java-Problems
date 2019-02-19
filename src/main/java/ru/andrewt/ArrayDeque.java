@@ -11,16 +11,16 @@ package ru.andrewt;
  * @author Andrei Tatarnikov
  */
 public class ArrayDeque<T> {
-  protected final T[] array;
-  protected int length;
-  protected int head;
-  protected int tail;
+  private T[] array;
+  private int length;
+  private int head;
+  private int tail;
 
   public ArrayDeque(final int capacity) {
     this.array = ArrayUtils.newArray(capacity);
     this.length = 0;
 
-    this.head = capacity / 2;
+    this.head = 0;
     this.tail = this.head;
   }
 
@@ -28,7 +28,7 @@ public class ArrayDeque<T> {
     return length == 0;
   }
 
-  protected boolean isFull() {
+  public boolean isFull() {
     return length == array.length;
   }
 
@@ -89,23 +89,56 @@ public class ArrayDeque<T> {
   }
 
   public T[] toArray() {
-    return null;
+    T[] newArray = ArrayUtils.newArray(array.length);
+    int index = head;
+
+    for (int position = 0; position < newArray.length; ++position) {
+      newArray[position] = array[index];
+      index = next(index);
+    }
+
+    return newArray;
   }
 
   @Override
   public String toString() {
-    return null;
+    final StringBuilder builder = new StringBuilder();
+    builder.append('[');
+
+    int index = head;
+    for (int i = 0; i < length; ++i) {
+      if (i != 0) {
+        builder.append(", ");
+      }
+      index = next(index);
+      builder.append(array[index]);
+    }
+
+    builder.append(']');
+    return builder.toString();
   }
 
-  protected void grow() {
-      // TODO
+  private void grow() {
+
+    // TODO
+    T[] newArray = ArrayUtils.newArray(array.length * 2);
+
+    int h = next(head);
+    int t = prev(tail);
+
+    System.arraycopy(array, h, newArray, 0,array.length - h);
+    System.arraycopy(array, 0, newArray, array.length - head,tail);
+
+    array = newArray;
+    head = 0;
+    tail = length;
   }
 
-  protected int prev(int index) {
+  private int prev(int index) {
     return (index == 0 ? array.length : index) - 1;
   }
 
-  protected int next(int index) {
+  private int next(int index) {
     return ++index == array.length ? 0 : index;
   }
 
