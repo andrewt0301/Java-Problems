@@ -76,4 +76,60 @@ public final class Searching {
     return -1;
   }
 
+  public static int[] findMaxSubarray(final int[] data) {
+    return findMaxSubarray(data, 0, data.length -1);
+  }
+
+  public static int[] findMaxSubarray(final int[] data, final int low, final int high) {
+
+    if (low == high) {
+      return new int[] { low, high, data[low] };
+    }
+
+    final int mid = (low + high) / 2;
+
+    final int[] left = findMaxSubarray(data, low, mid);
+    final int[] right = findMaxSubarray(data, mid + 1, high);
+    final int[] crossing = findCrossingSubarray(data, low, mid, high);
+
+    if (left[2] >= right[2] && left[2] >= crossing[2]) {
+      return left;
+    }
+
+    if (right[2] >= left[2] && right[2] >= crossing[2]) {
+      return left;
+    }
+
+    return crossing;
+  }
+
+  public static int[] findCrossingSubarray(final int[] data, final int low, final int mid, final int high) {
+
+    int leftSum = Integer.MIN_VALUE;
+    int maxLeft = -1;
+    int sum = 0;
+
+    for (int i = mid; i >= low; --i) {
+      sum += data[i];
+      if (sum > leftSum) {
+        leftSum = sum;
+        maxLeft = i;
+      }
+    }
+
+    int rightSum = Integer.MIN_VALUE;
+    int maxRight = -1;
+    sum = 0;
+
+    for (int i = mid + 1; i <= high; ++i) {
+      sum += data[i];
+      if (sum > maxRight) {
+        rightSum = sum;
+        maxRight = i;
+      }
+    }
+
+    return new int[] { maxLeft, maxRight, leftSum + rightSum };
+  }
+
 }
