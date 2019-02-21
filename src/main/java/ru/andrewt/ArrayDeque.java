@@ -41,8 +41,13 @@ public class ArrayDeque<T> {
       grow();
     }
 
-    head = prev(head);
+    if (head == tail) {
+      tail = next(tail);
+    }
+
     array[head] = value;
+    head = prev(head);
+
     ++length;
   }
 
@@ -67,8 +72,13 @@ public class ArrayDeque<T> {
       grow();
     }
 
-    tail = next(tail);
+    if (head == tail) {
+      head = prev(head);
+    }
+
     array[tail] = value;
+    tail = next(tail);
+
     ++length;
   }
 
