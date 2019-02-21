@@ -41,14 +41,12 @@ public class ArrayDeque<T> {
       grow();
     }
 
-    if (head == tail) {
-      tail = next(tail);
+    if (!isEmpty()) {
+      head = prev(head);
     }
 
     array[head] = value;
-    head = prev(head);
-
-    ++length;
+    length++;
   }
 
   public T peekFirst() {
@@ -72,13 +70,11 @@ public class ArrayDeque<T> {
       grow();
     }
 
-    if (head == tail) {
-      head = prev(head);
+    if (!isEmpty()) {
+      tail = next(tail);
     }
 
     array[tail] = value;
-    tail = next(tail);
-
     ++length;
   }
 
@@ -100,11 +96,11 @@ public class ArrayDeque<T> {
 
   public T[] toArray() {
     T[] newArray = ArrayUtils.newArray(array.length);
-    int index = head;
+    int cursor = head;
 
-    for (int position = 0; position < newArray.length; ++position) {
-      newArray[position] = array[index];
-      index = next(index);
+    for (int index = 0; index < length; ++index) {
+      newArray[index] = array[cursor];
+      cursor = next(cursor);
     }
 
     return newArray;
@@ -120,8 +116,8 @@ public class ArrayDeque<T> {
       if (i != 0) {
         builder.append(", ");
       }
-      index = next(index);
       builder.append(array[index]);
+      index = next(index);
     }
 
     builder.append(']');
@@ -129,27 +125,28 @@ public class ArrayDeque<T> {
   }
 
   private void grow() {
-
-    // TODO
     T[] newArray = ArrayUtils.newArray(array.length * 2);
 
-    int h = next(head);
-    int t = prev(tail);
-
-    System.arraycopy(array, h, newArray, 0,array.length - h);
-    System.arraycopy(array, 0, newArray, array.length - head,tail);
+    if (head < tail) {
+      System.arraycopy(array, head, newArray, 0,tail - head);
+    } else {
+      final int headLength = array.length - head;
+      System.arraycopy(array, head, newArray, 0, headLength);
+      System.arraycopy(array, 0, newArray, headLength, tail + 1);
+    }
 
     array = newArray;
     head = 0;
-    tail = length;
+    tail = length - 1;
   }
 
-  private int prev(int index) {
+  private int prev(final int index) {
     return (index == 0 ? array.length : index) - 1;
   }
 
-  private int next(int index) {
-    return ++index == array.length ? 0 : index;
+  private int next(final int index) {
+    final int nextIndex = index + 1;
+    return nextIndex == array.length ? 0 : nextIndex;
   }
 
 }
