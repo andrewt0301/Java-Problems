@@ -58,6 +58,15 @@ public class SearchingTest {
     // Duplicated existing values.
     Assert.assertEquals(3, Searching.binarySearch(data, 0));
     Assert.assertEquals(12, Searching.binarySearch(data, 9));
+
+    // Unsorted data.
+    final int unsortedData[] = { 1, 2, -1, 3, 4, 0, 5, 6 };
+
+    // When data is unsorted: a key may be found in some cases while in the other not.
+    Assert.assertEquals(-1, Searching.binarySearch(unsortedData, -1));
+    Assert.assertEquals(-1, Searching.binarySearch(unsortedData, 0));
+    Assert.assertEquals(6,  Searching.binarySearch(unsortedData, 5));
+    Assert.assertEquals(-1,  Searching.binarySearch(unsortedData, 4));
   }
 
   @Test
