@@ -11,7 +11,7 @@ public final class Searching {
 
   /**
    * Performs linear search for the specified key in the array of integers
-   * and returns the position of the found item.
+   * and returns the position of the found element.
    * <p>
    * Time complexity: O(N), where N is the length of the array.
    * <p/>
@@ -29,6 +29,14 @@ public final class Searching {
     return -1;
   }
 
+  /**
+   * Finds the minimal element in the specified array of integers.
+   * <p>
+   * Time complexity: O(N), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @return Value of the minimal element.
+   */
   public static int min(final int[] data) {
     int min = data[0];
     for (int index = 1; index < data.length; ++index) {
@@ -40,6 +48,14 @@ public final class Searching {
     return min;
   }
 
+  /**
+   * Finds the maximal element in the specified array of integers.
+   * <p>
+   * Time complexity: O(N), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @return Value of the maximal element.
+   */
   public static int max(final int[] data) {
     int max = data[0];
     for (int index = 1; index < data.length; ++index) {
@@ -51,6 +67,14 @@ public final class Searching {
     return max;
   }
 
+  /**
+   * Finds both the minimal and maximal element in the specified array of integers.
+   * <p>
+   * Time complexity: O(N), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @return Array of values of the minimal element and the maximal element ({@code [min, max]}).
+   */
   public static int[] minAndMax(final int[] data) {
     int min = data[0];
     int max = min;
