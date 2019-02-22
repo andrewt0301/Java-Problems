@@ -9,6 +9,17 @@ package ru.andrewt;
 public final class Searching {
   private Searching() {}
 
+  /**
+   * Performs linear search for the specified key in the array of integers
+   * and returns the position of the found item.
+   * <p>
+   * Time complexity: O(N), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @param key Key to be searched.
+   * @return Position of the first occurrence of the key in the array
+   *         or {@code -1} if the key is not found.
+   */
   public static int linearSearch(final int[] data, final int key) {
     for (int index = 0; index < data.length; ++index) {
       if (key == data[index]) {
