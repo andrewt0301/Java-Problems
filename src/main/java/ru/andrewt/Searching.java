@@ -91,6 +91,18 @@ public final class Searching {
     return new int[] { min, max };
   }
 
+  /**
+   * Performs binary search for the specified key in the sorted array of integers and returns
+   * the position of the found element. If the array is not sorted, the result is undefined.
+   * If the array contains multiple elements with the specified value, there is no guarantee
+   * which one will be found.
+   * <p>
+   * Time complexity: O(lg(N)), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @param key Key to be searched.
+   * @return Position of the key in the array or {@code -1} if the key is not found.
+   */
   public static int binarySearch(final int[] data, final int key) {
     int low = 0;
     int high = data.length - 1;
