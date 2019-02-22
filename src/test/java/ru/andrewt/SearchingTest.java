@@ -40,6 +40,27 @@ public class SearchingTest {
   }
 
   @Test
+  public void testBinarySearch() {
+    final int data[] = { -5, -3, 0, 0, 0, 1, 3, 5, 6, 8, 9, 9, 9, 11, 13, 17, 19 };
+
+    // Missing keys.
+    Assert.assertEquals(-1, Searching.binarySearch(data, -2));
+    Assert.assertEquals(-1, Searching.binarySearch(data, 2));
+
+    // First and last.
+    Assert.assertEquals(0, Searching.binarySearch(data, -5));
+    Assert.assertEquals(data.length - 1, Searching.binarySearch(data, 19));
+
+    // Unique existing values.
+    Assert.assertEquals(5, Searching.binarySearch(data, 1));
+    Assert.assertEquals(13, Searching.binarySearch(data, 11));
+
+    // Duplicated existing values.
+    Assert.assertEquals(3, Searching.binarySearch(data, 0));
+    Assert.assertEquals(12, Searching.binarySearch(data, 9));
+  }
+
+  @Test
   public void testFindMaxSubarray() {
     // TODO
     int[] data = {1, 2, 4, -10, 5, 9, 0, -1, 3, -5 };
