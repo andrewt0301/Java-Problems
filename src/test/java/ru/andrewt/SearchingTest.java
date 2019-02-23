@@ -71,10 +71,24 @@ public class SearchingTest {
 
   @Test
   public void testFindMaxSubarray() {
-    // TODO
-    int[] data = {1, 2, 4, -10, 5, 9, 0, -1, 3, -5 };
-    int[] x = Searching.findMaxSubarray(data);
-    System.out.println(Arrays.toString(x));
+
+    final int[] data = { 1, 2, -1, 4, -10, 5, 9, 0, -1, 3, -5, -3, 7 };
+
+    Assert.assertArrayEquals(
+        new int[] { 5, 9, 16 },
+        Searching.findMaxSubarray(data));
+
+    Assert.assertArrayEquals(
+        new int[] { 0, 2, 2 },
+        Searching.findMiddleSubarray(data, 0, 1, 2));
+
+    Assert.assertArrayEquals(
+        new int[] { 0, 3, 6 },
+        Searching.findMiddleSubarray(data, 0, 1, 3));
+
+    Assert.assertArrayEquals(
+        new int[] { 5, 9, 16 },
+        Searching.findMiddleSubarray(data, 0, 6, 12));
   }
 
 }
