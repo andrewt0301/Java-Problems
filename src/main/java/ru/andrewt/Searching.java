@@ -123,10 +123,31 @@ public final class Searching {
     return -1;
   }
 
+  /**
+   * Searches an array of integers for a subarray that gives maximum possible
+   * sum of its elements.
+   * <p>
+   * Time complexity: O(N lg(N)), where N is the length of the array.
+   * <p/>
+   * @param data Array of integers.
+   * @return Tuple describing the subarray being found: [start, end, sum of elements].
+   */
   public static int[] findMaxSubarray(final int[] data) {
     return findMaxSubarray(data, 0, data.length -1);
   }
 
+  /**
+   * Searches an array of integers within the specified range for a subarray that gives maximum
+   * possible sum of its elements.
+   * <p>
+   * Time complexity: O(N lg(N)), where N is the length of the search range.
+   * <p/>
+   * @param data Array of integers.
+   * @param low Low position of the search range.
+   * @param high High position of the search range.
+   * @return Tuple describing the subarray being found:
+   *         [low position, high position, sum of elements].
+   */
   public static int[] findMaxSubarray(final int[] data, final int low, final int high) {
 
     if (low == high) {
@@ -137,7 +158,7 @@ public final class Searching {
 
     final int[] left = findMaxSubarray(data, low, mid);
     final int[] right = findMaxSubarray(data, mid + 1, high);
-    final int[] crossing = findCrossingSubarray(data, low, mid, high);
+    final int[] crossing = findMiddleSubarray(data, low, mid, high);
 
     if (left[2] >= right[2] && left[2] >= crossing[2]) {
       return left;
@@ -150,7 +171,25 @@ public final class Searching {
     return crossing;
   }
 
-  public static int[] findCrossingSubarray(final int[] data, final int low, final int mid, final int high) {
+  /**
+   * Searches an array of integers within the specified range for a subarray that gives maximum
+   * possible sum of its elements. The subarray must be located in the middle of the search range
+   * (that is it must include the middle element and some lower or higher elements).
+   * <p>
+   * Time complexity: O(N), where N is the length of the search range.
+   * <p/>
+   * @param data Array of integers.
+   * @param low Low position of the search range.
+   * @param mid Middle position of the search range.
+   * @param high High position of the search range.
+   * @return Tuple describing the subarray being found:
+   *         [low position, high position, sum of elements].
+   */
+  public static int[] findMiddleSubarray(
+      final int[] data,
+      final int low,
+      final int mid,
+      final int high) {
 
     int leftSum = Integer.MIN_VALUE;
     int maxLeft = -1;
