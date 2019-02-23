@@ -4,8 +4,6 @@ package ru.andrewt;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 /**
  * Tests for the methods of the {@link Searching} class.
  *
@@ -80,15 +78,15 @@ public class SearchingTest {
 
     Assert.assertArrayEquals(
         new int[] { 0, 2, 2 },
-        Searching.findMiddleSubarray(data, 0, 1, 2));
+        Searching.findMaxSubarrayMiddle(data, 0, 1, 2));
 
     Assert.assertArrayEquals(
         new int[] { 0, 3, 6 },
-        Searching.findMiddleSubarray(data, 0, 1, 3));
+        Searching.findMaxSubarrayMiddle(data, 0, 1, 3));
 
     Assert.assertArrayEquals(
         new int[] { 5, 9, 16 },
-        Searching.findMiddleSubarray(data, 0, 6, 12));
+        Searching.findMaxSubarrayMiddle(data, 0, 6, 12));
   }
 
 }

@@ -158,7 +158,7 @@ public final class Searching {
 
     final int[] left = findMaxSubarray(data, low, mid);
     final int[] right = findMaxSubarray(data, mid + 1, high);
-    final int[] crossing = findMiddleSubarray(data, low, mid, high);
+    final int[] crossing = findMaxSubarrayMiddle(data, low, mid, high);
 
     if (left[2] >= right[2] && left[2] >= crossing[2]) {
       return left;
@@ -185,7 +185,7 @@ public final class Searching {
    * @return Tuple describing the subarray being found:
    *         [low position, high position, sum of elements].
    */
-  public static int[] findMiddleSubarray(
+  public static int[] findMaxSubarrayMiddle(
       final int[] data,
       final int low,
       final int mid,
