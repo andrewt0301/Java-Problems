@@ -133,7 +133,7 @@ public final class Searching {
    * @return Tuple describing the subarray being found: [start, end, sum of elements].
    */
   public static int[] findMaxSubarray(final int[] data) {
-    return findMaxSubarray(data, 0, data.length -1);
+    return findMaxSubarray(data, 0, data.length - 1);
   }
 
   /**
@@ -165,7 +165,7 @@ public final class Searching {
     }
 
     if (right[2] >= left[2] && right[2] >= crossing[2]) {
-      return left;
+      return right;
     }
 
     return crossing;
@@ -209,7 +209,7 @@ public final class Searching {
 
     for (int i = mid + 1; i <= high; ++i) {
       sum += data[i];
-      if (sum > maxRight) {
+      if (sum > rightSum) {
         rightSum = sum;
         maxRight = i;
       }
