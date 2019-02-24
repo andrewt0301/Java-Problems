@@ -23,7 +23,7 @@ public final class Tasks {
   public static int lengthOfLongestSubarray(final int[] data, final int k) {
 
     // HashMap to store (sum, index) pairs.
-    final Map<Integer, Integer> map = new HashMap<>();
+    final Map<Integer, Integer> sumsAndPos = new HashMap<>();
 
     int sum = 0;
     int maxLen = 0;
@@ -31,19 +31,19 @@ public final class Tasks {
     for (int i = 0; i < data.length; i++) {
       sum += data[i];
 
-      // Add an entry for 'sum' if it is not present in the map.
-      if (!map.containsKey(sum)) {
-        map.put(sum, i);
+      // Add an entry for 'sum' if it is not added yet.
+      if (!sumsAndPos.containsKey(sum)) {
+        sumsAndPos.put(sum, i);
       }
 
       // When subarray starts from index '0'.
       if (sum == k) {
         maxLen = i + 1;
       } else {
-        // Find prefix that gives 'sum - k' if it is present in the map.
-        final Integer prefix = map.get(sum - k);
-        if (prefix != null) {
-          final int lenWithoutPrefix = i - prefix;
+        // Find position of the prefix that gives 'sum - k' if it is present in the map.
+        final Integer prefixPos = sumsAndPos.get(sum - k);
+        if (prefixPos != null) {
+          final int lenWithoutPrefix = i - prefixPos;
           if (maxLen < lenWithoutPrefix) {
             maxLen = lenWithoutPrefix;
           }
