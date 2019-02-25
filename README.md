@@ -1,5 +1,7 @@
 Java Code Examples
 ----------------------------------------------------------------------------------------------------
+[![Build Status](https://travis-ci.org/andrewt0301/Java-Problems.svg?branch=master)](https://travis-ci.org/andrewt0301/Java-Problems)
+----------------------------------------------------------------------------------------------------
 
 This is an educational project that contains examples of Java-implementations
 of various algorithms and data structures.
