@@ -2,4 +2,5 @@ bin
 build
 .*
 !.gitignore
+!.travis.yml
 *.iml

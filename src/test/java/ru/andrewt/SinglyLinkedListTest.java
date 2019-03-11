@@ -133,6 +133,25 @@ public class SinglyLinkedListTest {
   }
 
   @Test
+  public void testGetFirstGetLast() {
+    final SinglyLinkedList<Integer> list = new SinglyLinkedList(1, 2, 3, 4, 5);
+    Assert.assertEquals(Integer.valueOf(1), list.getFirst());
+    Assert.assertEquals(Integer.valueOf(5), list.getLast());
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testGetFirst() {
+    final SinglyLinkedList<Integer> list = new SinglyLinkedList();
+    list.getFirst();
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testGetLast() {
+    final SinglyLinkedList<Integer> list = new SinglyLinkedList();
+    list.getLast();
+  }
+
+  @Test
   public void testToString() {
     Assert.assertEquals(
         new SinglyLinkedList().toString(), "[]");
