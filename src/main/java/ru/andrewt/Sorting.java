@@ -45,6 +45,31 @@ public final class Sorting {
     }
   }
 
+
+  /**
+   * Sorts an array of integers into ascending numerical order using the selection sort algorithm.
+   * <p>
+   * Time complexity: {@code Θ(N**2)}, where N is the length of the array.
+   * <p/>
+   * @param data Array to be sorted.
+   */
+  public static void selectionSort(final int[] data) {
+
+    for (int i = 0; i < data.length; ++i) {
+
+      int min = i;
+      for (int j = i + 1; j < data.length; ++j) {
+        if (data[j] < data[min]) {
+          min = j;
+        }
+      }
+
+      if (i != min) {
+        ArrayUtils.swap(data, i, min);
+      }
+    }
+  }
+
   public static void quickSort(final int[] data) {
     quickSort(data, 0, data.length - 1);
   }

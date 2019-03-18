@@ -30,6 +30,13 @@ public class SortingTest {
   }
 
   @Test
+  public void testSelectionSort() {
+    final int[] data = Arrays.copyOf(UNSORTED, UNSORTED.length);
+    Sorting.selectionSort(data);
+    Assert.assertArrayEquals(SORTED, data);
+  }
+
+  @Test
   public void testMergeSort() {
     final int[] data = Arrays.copyOf(UNSORTED, UNSORTED.length);
     Sorting.mergeSort(data);
