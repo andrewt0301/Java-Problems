@@ -11,14 +11,22 @@ import java.util.Arrays;
 public final class Sorting {
   private Sorting() {}
 
+  /**
+   * Sorts an array of integers into ascending numerical order using the insertion sort algorithm.
+   * <p>
+   * Time complexity: {@code Θ(N**2)}, where N is the length of the array.
+   * <p/>
+   * @param data Array to be sorted.
+   */
   public static void insertionSort(final int[] data) {
-    for (int i = 1; i < data.length; i++) {
+
+    for (int i = 1; i < data.length; ++i) {
       final int key = data[i];
 
       int j = i - 1;
       while (j >= 0 && data[j] > key) {
         data[j + 1] = data[j];
-        j--;
+        --j;
       }
 
       data[j + 1] = key;
@@ -26,6 +34,7 @@ public final class Sorting {
   }
 
   public static void bubbleSort(final int[] data) {
+
     for (int i = 0; i < data.length - 1; i++) {
       for (int j = data.length - 1; j > i; j--) {
         final int k = j - 1;
@@ -41,6 +50,7 @@ public final class Sorting {
   }
 
   public static void quickSort(final int[] data, final int start, final int end) {
+
     if (start < end) {
       final int split = partition(data, start, end);
       quickSort(data, start, split - 1);
@@ -49,12 +59,13 @@ public final class Sorting {
   }
 
   private static int partition(final int[] data, final int start, final int end) {
+
     final int pivot = data[end];
     int split = start;
 
-    for (int index = start; index < end; index++) {
-      if (data[index] <= pivot) {
-        ArrayUtils.swap(data, split, index);
+    for (int i = start; i < end; ++i) {
+      if (data[i] <= pivot) {
+        ArrayUtils.swap(data, split, i);
         split++;
       }
     }
@@ -68,6 +79,7 @@ public final class Sorting {
   }
 
   public static void mergeSort(final int[] data, final int start, final int end) {
+
     if (start < end) {
       final int split = (start + end) / 2;
       mergeSort(data, start, split);
@@ -77,6 +89,7 @@ public final class Sorting {
   }
 
   private static void merge(int[] data, int start, int split, int end) {
+
     final int leftLen = split - start + 1;
     final int[] leftData = new int[leftLen + 1];
     for (int index = 0; index < leftLen; index++) {
@@ -109,18 +122,17 @@ public final class Sorting {
     final int[] counts = new int[rangeSize];
     Arrays.fill(counts, 0);
 
-    for (int index = 0; index < data.length; ++index) {
-      final int value = data[index];
+    for (final int value : data) {
       counts[value]++;
     }
 
-    for (int index = 1; index < counts.length; ++index) {
-      counts[index] += counts[index - 1];
+    for (int i = 1; i < counts.length; ++i) {
+      counts[i] += counts[i - 1];
     }
 
     final int[] dataCopy = Arrays.copyOf(data, data.length);
-    for (int index = data.length - 1; index >=0; --index) {
-      final int value = dataCopy[index];
+    for (int i = data.length - 1; i >=0; --i) {
+      final int value = dataCopy[i];
       final int count = counts[value];
 
       data[count - 1] = value;
@@ -135,7 +147,7 @@ public final class Sorting {
   }
 
   /**
-   * Partitions array of integers checking whether they satisfy the bit mask.
+   * Partitions an array of integers checking whether they satisfy the bit mask.
    *
    * <p>Values unsatisfying the mask are placed first and the ones satisfying the mask are
    * placed next. The partition is stable (does not break relative order of values belonging
@@ -145,6 +157,7 @@ public final class Sorting {
    * @param mask Bit mask used for partitioning.
    */
   public static void partitionWithMask(final int[] data, final int mask) {
+
     // End position of the first partition.
     int partitionIndex = 0;
 
@@ -161,4 +174,5 @@ public final class Sorting {
       }
     }
   }
+
 }
