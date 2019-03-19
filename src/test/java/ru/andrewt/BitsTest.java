@@ -22,8 +22,7 @@ public class BitsTest {
     final int testCount = Integer.SIZE * 2;
     final Collection<Object[]> data = new ArrayList<>(testCount);
 
-    int index = 0;
-    for (int value = 1; value != 0; value = value << 1) {
+    for (int value = 1; value != 0; value <<= 1) {
       data.add(new Object[] {value, true});
       data.add(new Object[] {value != 1 ? value + 1 : value - 1, false});
     }
@@ -32,7 +31,7 @@ public class BitsTest {
   }
 
   @Test
-  public void testIsPowerOfTwo() throws Exception {
+  public void testIsPowerOfTwo() {
     Assert.assertEquals(Bits.isPowerOfTwo(input), expected);
   }
 }

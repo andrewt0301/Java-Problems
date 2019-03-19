@@ -19,4 +19,21 @@ public final class Bits {
     return value != 0 && (value & value - 1) == 0;
   }
 
+
+  /**
+   * Counts bits set to 1 in an integer value.
+   * Efficient for values that have a relatively small number of bits set to 1.
+   *
+   * @param value Integer value.
+   * @return Number of bits set to 1 in the integer value.
+   */
+  public int getBitCount(final int value) {
+
+    int count = 0;
+    for (int v = value; v != 0; v &= v - 1) {
+      ++count;
+    }
+    return count;
+  }
+
 }
