@@ -24,7 +24,7 @@ public class BitsTest2 {
         {0xDEADBEEF, 24}
     };
 
-    for (int[] testCase : testData) {
+    for (final int[] testCase : testData) {
       final int value = testCase[0];
       final int count = testCase[1];
 
