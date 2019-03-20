@@ -27,7 +27,7 @@ public final class Bits {
    * @param value Integer value.
    * @return Number of bits set to 1 in the integer value.
    */
-  public int getBitCount(final int value) {
+  public static int getBitCount(final int value) {
 
     int count = 0;
     for (int v = value; v != 0; v &= v - 1) {

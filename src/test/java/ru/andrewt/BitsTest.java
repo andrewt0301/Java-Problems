@@ -9,6 +9,11 @@ import org.junit.runners.Parameterized;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Tests for the {@link Bits#isPowerOfTwo} method.
+ *
+ * @author Andrei Tatarnikov
+ */
 @RunWith(Parameterized.class)
 public class BitsTest {
   @Parameterized.Parameter()
