@@ -33,14 +33,28 @@ public final class Sorting {
     }
   }
 
+  /**
+   * Sorts an array of integers into ascending numerical order using the bubble sort algorithm.
+   * <p>
+   * Time complexity: {@code O(N^2)}, where N is the length of the array.
+   * <p/>
+   * @param data Array to be sorted.
+   */
   public static void bubbleSort(final int[] data) {
 
     for (int i = 0; i < data.length - 1; ++i) {
+      boolean isNoSwaps = true;
+
       for (int j = data.length - 1; j > i; --j) {
         final int k = j - 1;
         if (data[j] < data[k]) {
           ArrayUtils.swap(data, j, k);
+          isNoSwaps = false;
         }
+      }
+
+      if (isNoSwaps) {
+        break;
       }
     }
   }

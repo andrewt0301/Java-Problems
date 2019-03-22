@@ -27,6 +27,10 @@ public class SortingTest {
     final int[] data = Arrays.copyOf(UNSORTED, UNSORTED.length);
     Sorting.bubbleSort(data);
     Assert.assertArrayEquals(SORTED, data);
+
+    final int[] data1 = Arrays.copyOf(SORTED, SORTED.length);
+    Sorting.bubbleSort(data1);
+    Assert.assertArrayEquals(SORTED, data1);
   }
 
   @Test
