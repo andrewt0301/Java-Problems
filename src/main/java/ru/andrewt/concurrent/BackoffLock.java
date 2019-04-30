@@ -1,9 +1,3 @@
-/**
- * @file BackoffLock
- * @author Tatarnikov_A
- * @date 04.04.2019
- * @short
- */
 
 package ru.andrewt.concurrent;
 
