@@ -9,7 +9,7 @@ import java.util.Objects;
  * This is a wrapper class that allows enumerating an iterator from multiple threads.
  * <p>
  * It ensures that the {@code nextElement} method returns a valid element even if another
- * thread has been scheduled between {@code hasMoreElements} and {@code nextElement}.
+ * threads have been scheduled between calls to {@code hasMoreElements} and {@code nextElement}.
  *
  * @param <T> Element type.
  */
