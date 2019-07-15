@@ -27,6 +27,8 @@ public class StringsTest {
     Assert.assertEquals(-1, Strings.naiveSearch("", 3, "is"));
     Assert.assertEquals(0,  Strings.naiveSearch("", 0, ""));
     Assert.assertEquals(5,  Strings.naiveSearch(text, 5, ""));
+
+    Assert.assertEquals(-1, Strings.naiveSearch(text, 0, "ingos"));
   }
 
 }
