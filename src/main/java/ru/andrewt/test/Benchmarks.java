@@ -9,13 +9,26 @@ package ru.andrewt.test;
 public final class Benchmarks {
   private Benchmarks() {}
 
+  /**
+   * Measures execution time of the specified function in milliseconds.
+   *
+   * @param runnable Some function.
+   * @return Execution time in milliseconds.
+   */
   public static long calcExecTimeMillis(final Runnable runnable) {
-      final long before = System.currentTimeMillis();
-      runnable.run();
-      final long after = System.currentTimeMillis();
-      return after - before;
+    final long before = System.currentTimeMillis();
+    runnable.run();
+    final long after = System.currentTimeMillis();
+    return after - before;
   }
 
+  /**
+   * Measures average execution time of the specified function in milliseconds.
+   *
+   * @param runnable Some function.
+   * @param count Number of times the function is executed to measure its average execution time.
+   * @return Average execution time in milliseconds.
+   */
   public static long calcAverageExecTimeMillis(final Runnable runnable, final int count) {
     final long before = System.currentTimeMillis();
     for (int i = 0; i < count; ++i) {
@@ -27,6 +40,12 @@ public final class Benchmarks {
     return average;
   }
 
+  /**
+   * Measures execution time of the specified function in nanoseconds.
+   *
+   * @param runnable Some function.
+   * @return Execution time in nanoseconds.
+   */
   public static long calcExecTimeNanos(final Runnable runnable) {
     final long before = System.nanoTime();
     runnable.run();
@@ -34,6 +53,13 @@ public final class Benchmarks {
     return after - before;
   }
 
+  /**
+   * Measures average execution time of the specified function in nanoseconds.
+   *
+   * @param runnable Some function.
+   * @param count Number of times the function is executed to measure its average execution time.
+   * @return Average execution time in nanoseconds.
+   */
   public static long calcAverageExecTimeNanos(final Runnable runnable, final int count) {
     final long before = System.nanoTime();
     for (int i = 0; i < count; ++i) {
